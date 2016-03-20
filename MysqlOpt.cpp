@@ -11,7 +11,7 @@ char *msg = new char[1024];
 void connectMysql()
 {
 	mysql_init(&mysql);
-	mysql_real_connect(&mysql, "localhost", "root", "st6rangie", "note", 3306, NULL, 0);
+	mysql_real_connect(&mysql, "localhost", "puzzlegame", "puzzlegame", "PuzzleGame", 3306, NULL, 0);
 }
 
 void signup()
