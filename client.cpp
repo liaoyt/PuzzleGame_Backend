@@ -43,8 +43,7 @@ int main()
 	printf("Test for MIL:\n");
 	// genarate test msg
 	protobufUtils::PGRequest request;
-	request.set_requesttype("post");
-	request.set_requestcode("0");
+	request.set_code(10);
 	printf("%s\n", "check request:");
 	request.CheckInitialized();
 	printf("%s\n", "request OK");
@@ -53,14 +52,15 @@ int main()
 	// send the msg to the server
 	write(sockfd, msg, strlen(msg));
 	len = read(sockfd, buf, 1024);
+
 	protobufUtils::PGRequest backInfo;
 	backInfo.ParseFromArray(buf, len);
 	printf("%s\n", "check backInfo:");
 	backInfo.CheckInitialized();
 	printf("%s\n", "backInfo OK");
 
-	if(backInfo.has_picture()){
-		printf("%s\n", backInfo.picture().c_str());
+	if(backInfo.has_errorinfo()){
+		printf("%s\n", backInfo.errorinfo().c_str());
 	}
 
 	

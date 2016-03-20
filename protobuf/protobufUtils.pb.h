@@ -91,17 +91,12 @@ class PGRequest_RankInfo : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string myRank = 1;
+  // required int32 myRank = 1;
   inline bool has_myrank() const;
   inline void clear_myrank();
   static const int kMyRankFieldNumber = 1;
-  inline const ::std::string& myrank() const;
-  inline void set_myrank(const ::std::string& value);
-  inline void set_myrank(const char* value);
-  inline void set_myrank(const char* value, size_t size);
-  inline ::std::string* mutable_myrank();
-  inline ::std::string* release_myrank();
-  inline void set_allocated_myrank(::std::string* myrank);
+  inline ::google::protobuf::int32 myrank() const;
+  inline void set_myrank(::google::protobuf::int32 value);
 
   // repeated string username = 2;
   inline int username_size() const;
@@ -128,8 +123,8 @@ class PGRequest_RankInfo : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::std::string* myrank_;
   ::google::protobuf::RepeatedPtrField< ::std::string> username_;
+  ::google::protobuf::int32 myrank_;
   friend void  protobuf_AddDesc_protobufUtils_2eproto();
   friend void protobuf_AssignDesc_protobufUtils_2eproto();
   friend void protobuf_ShutdownFile_protobufUtils_2eproto();
@@ -194,29 +189,24 @@ class PGRequest : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required string requestType = 1;
-  inline bool has_requesttype() const;
-  inline void clear_requesttype();
-  static const int kRequestTypeFieldNumber = 1;
-  inline const ::std::string& requesttype() const;
-  inline void set_requesttype(const ::std::string& value);
-  inline void set_requesttype(const char* value);
-  inline void set_requesttype(const char* value, size_t size);
-  inline ::std::string* mutable_requesttype();
-  inline ::std::string* release_requesttype();
-  inline void set_allocated_requesttype(::std::string* requesttype);
+  // required int32 Code = 1;
+  inline bool has_code() const;
+  inline void clear_code();
+  static const int kCodeFieldNumber = 1;
+  inline ::google::protobuf::int32 code() const;
+  inline void set_code(::google::protobuf::int32 value);
 
-  // required string requestCode = 2;
-  inline bool has_requestcode() const;
-  inline void clear_requestcode();
-  static const int kRequestCodeFieldNumber = 2;
-  inline const ::std::string& requestcode() const;
-  inline void set_requestcode(const ::std::string& value);
-  inline void set_requestcode(const char* value);
-  inline void set_requestcode(const char* value, size_t size);
-  inline ::std::string* mutable_requestcode();
-  inline ::std::string* release_requestcode();
-  inline void set_allocated_requestcode(::std::string* requestcode);
+  // optional string errorInfo = 2;
+  inline bool has_errorinfo() const;
+  inline void clear_errorinfo();
+  static const int kErrorInfoFieldNumber = 2;
+  inline const ::std::string& errorinfo() const;
+  inline void set_errorinfo(const ::std::string& value);
+  inline void set_errorinfo(const char* value);
+  inline void set_errorinfo(const char* value, size_t size);
+  inline ::std::string* mutable_errorinfo();
+  inline ::std::string* release_errorinfo();
+  inline void set_allocated_errorinfo(::std::string* errorinfo);
 
   // optional string username = 3;
   inline bool has_username() const;
@@ -266,10 +256,19 @@ class PGRequest : public ::google::protobuf::Message {
   inline ::std::string* release_picture();
   inline void set_allocated_picture(::std::string* picture);
 
-  // repeated string picList = 7;
+  // optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;
+  inline bool has_rankinfo() const;
+  inline void clear_rankinfo();
+  static const int kRankInfoFieldNumber = 7;
+  inline const ::protobufUtils::PGRequest_RankInfo& rankinfo() const;
+  inline ::protobufUtils::PGRequest_RankInfo* mutable_rankinfo();
+  inline ::protobufUtils::PGRequest_RankInfo* release_rankinfo();
+  inline void set_allocated_rankinfo(::protobufUtils::PGRequest_RankInfo* rankinfo);
+
+  // repeated string picList = 8;
   inline int piclist_size() const;
   inline void clear_piclist();
-  static const int kPicListFieldNumber = 7;
+  static const int kPicListFieldNumber = 8;
   inline const ::std::string& piclist(int index) const;
   inline ::std::string* mutable_piclist(int index);
   inline void set_piclist(int index, const ::std::string& value);
@@ -282,21 +281,12 @@ class PGRequest : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& piclist() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_piclist();
 
-  // optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
-  inline bool has_rankinfo() const;
-  inline void clear_rankinfo();
-  static const int kRankInfoFieldNumber = 8;
-  inline const ::protobufUtils::PGRequest_RankInfo& rankinfo() const;
-  inline ::protobufUtils::PGRequest_RankInfo* mutable_rankinfo();
-  inline ::protobufUtils::PGRequest_RankInfo* release_rankinfo();
-  inline void set_allocated_rankinfo(::protobufUtils::PGRequest_RankInfo* rankinfo);
-
   // @@protoc_insertion_point(class_scope:protobufUtils.PGRequest)
  private:
-  inline void set_has_requesttype();
-  inline void clear_has_requesttype();
-  inline void set_has_requestcode();
-  inline void clear_has_requestcode();
+  inline void set_has_code();
+  inline void clear_has_code();
+  inline void set_has_errorinfo();
+  inline void clear_has_errorinfo();
   inline void set_has_username();
   inline void clear_has_username();
   inline void set_has_password();
@@ -312,14 +302,14 @@ class PGRequest : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::std::string* requesttype_;
-  ::std::string* requestcode_;
+  ::std::string* errorinfo_;
   ::std::string* username_;
   ::std::string* password_;
   ::std::string* score_;
   ::std::string* picture_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> piclist_;
   ::protobufUtils::PGRequest_RankInfo* rankinfo_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> piclist_;
+  ::google::protobuf::int32 code_;
   friend void  protobuf_AddDesc_protobufUtils_2eproto();
   friend void protobuf_AssignDesc_protobufUtils_2eproto();
   friend void protobuf_ShutdownFile_protobufUtils_2eproto();
@@ -334,7 +324,7 @@ class PGRequest : public ::google::protobuf::Message {
 
 // PGRequest_RankInfo
 
-// required string myRank = 1;
+// required int32 myRank = 1;
 inline bool PGRequest_RankInfo::has_myrank() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -345,69 +335,17 @@ inline void PGRequest_RankInfo::clear_has_myrank() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void PGRequest_RankInfo::clear_myrank() {
-  if (myrank_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    myrank_->clear();
-  }
+  myrank_ = 0;
   clear_has_myrank();
 }
-inline const ::std::string& PGRequest_RankInfo::myrank() const {
+inline ::google::protobuf::int32 PGRequest_RankInfo::myrank() const {
   // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.RankInfo.myRank)
-  return *myrank_;
-}
-inline void PGRequest_RankInfo::set_myrank(const ::std::string& value) {
-  set_has_myrank();
-  if (myrank_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    myrank_ = new ::std::string;
-  }
-  myrank_->assign(value);
-  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.RankInfo.myRank)
-}
-inline void PGRequest_RankInfo::set_myrank(const char* value) {
-  set_has_myrank();
-  if (myrank_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    myrank_ = new ::std::string;
-  }
-  myrank_->assign(value);
-  // @@protoc_insertion_point(field_set_char:protobufUtils.PGRequest.RankInfo.myRank)
-}
-inline void PGRequest_RankInfo::set_myrank(const char* value, size_t size) {
-  set_has_myrank();
-  if (myrank_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    myrank_ = new ::std::string;
-  }
-  myrank_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGRequest.RankInfo.myRank)
-}
-inline ::std::string* PGRequest_RankInfo::mutable_myrank() {
-  set_has_myrank();
-  if (myrank_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    myrank_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.RankInfo.myRank)
   return myrank_;
 }
-inline ::std::string* PGRequest_RankInfo::release_myrank() {
-  clear_has_myrank();
-  if (myrank_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = myrank_;
-    myrank_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void PGRequest_RankInfo::set_allocated_myrank(::std::string* myrank) {
-  if (myrank_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete myrank_;
-  }
-  if (myrank) {
-    set_has_myrank();
-    myrank_ = myrank;
-  } else {
-    clear_has_myrank();
-    myrank_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.RankInfo.myRank)
+inline void PGRequest_RankInfo::set_myrank(::google::protobuf::int32 value) {
+  set_has_myrank();
+  myrank_ = value;
+  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.RankInfo.myRank)
 }
 
 // repeated string username = 2;
@@ -468,156 +406,104 @@ PGRequest_RankInfo::mutable_username() {
 
 // PGRequest
 
-// required string requestType = 1;
-inline bool PGRequest::has_requesttype() const {
+// required int32 Code = 1;
+inline bool PGRequest::has_code() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void PGRequest::set_has_requesttype() {
+inline void PGRequest::set_has_code() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void PGRequest::clear_has_requesttype() {
+inline void PGRequest::clear_has_code() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void PGRequest::clear_requesttype() {
-  if (requesttype_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requesttype_->clear();
-  }
-  clear_has_requesttype();
+inline void PGRequest::clear_code() {
+  code_ = 0;
+  clear_has_code();
 }
-inline const ::std::string& PGRequest::requesttype() const {
-  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.requestType)
-  return *requesttype_;
+inline ::google::protobuf::int32 PGRequest::code() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.Code)
+  return code_;
 }
-inline void PGRequest::set_requesttype(const ::std::string& value) {
-  set_has_requesttype();
-  if (requesttype_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requesttype_ = new ::std::string;
-  }
-  requesttype_->assign(value);
-  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.requestType)
-}
-inline void PGRequest::set_requesttype(const char* value) {
-  set_has_requesttype();
-  if (requesttype_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requesttype_ = new ::std::string;
-  }
-  requesttype_->assign(value);
-  // @@protoc_insertion_point(field_set_char:protobufUtils.PGRequest.requestType)
-}
-inline void PGRequest::set_requesttype(const char* value, size_t size) {
-  set_has_requesttype();
-  if (requesttype_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requesttype_ = new ::std::string;
-  }
-  requesttype_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGRequest.requestType)
-}
-inline ::std::string* PGRequest::mutable_requesttype() {
-  set_has_requesttype();
-  if (requesttype_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requesttype_ = new ::std::string;
-  }
-  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.requestType)
-  return requesttype_;
-}
-inline ::std::string* PGRequest::release_requesttype() {
-  clear_has_requesttype();
-  if (requesttype_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    return NULL;
-  } else {
-    ::std::string* temp = requesttype_;
-    requesttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-    return temp;
-  }
-}
-inline void PGRequest::set_allocated_requesttype(::std::string* requesttype) {
-  if (requesttype_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete requesttype_;
-  }
-  if (requesttype) {
-    set_has_requesttype();
-    requesttype_ = requesttype;
-  } else {
-    clear_has_requesttype();
-    requesttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  }
-  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.requestType)
+inline void PGRequest::set_code(::google::protobuf::int32 value) {
+  set_has_code();
+  code_ = value;
+  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.Code)
 }
 
-// required string requestCode = 2;
-inline bool PGRequest::has_requestcode() const {
+// optional string errorInfo = 2;
+inline bool PGRequest::has_errorinfo() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void PGRequest::set_has_requestcode() {
+inline void PGRequest::set_has_errorinfo() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void PGRequest::clear_has_requestcode() {
+inline void PGRequest::clear_has_errorinfo() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void PGRequest::clear_requestcode() {
-  if (requestcode_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requestcode_->clear();
+inline void PGRequest::clear_errorinfo() {
+  if (errorinfo_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    errorinfo_->clear();
   }
-  clear_has_requestcode();
+  clear_has_errorinfo();
 }
-inline const ::std::string& PGRequest::requestcode() const {
-  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.requestCode)
-  return *requestcode_;
+inline const ::std::string& PGRequest::errorinfo() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.errorInfo)
+  return *errorinfo_;
 }
-inline void PGRequest::set_requestcode(const ::std::string& value) {
-  set_has_requestcode();
-  if (requestcode_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requestcode_ = new ::std::string;
+inline void PGRequest::set_errorinfo(const ::std::string& value) {
+  set_has_errorinfo();
+  if (errorinfo_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    errorinfo_ = new ::std::string;
   }
-  requestcode_->assign(value);
-  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.requestCode)
+  errorinfo_->assign(value);
+  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.errorInfo)
 }
-inline void PGRequest::set_requestcode(const char* value) {
-  set_has_requestcode();
-  if (requestcode_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requestcode_ = new ::std::string;
+inline void PGRequest::set_errorinfo(const char* value) {
+  set_has_errorinfo();
+  if (errorinfo_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    errorinfo_ = new ::std::string;
   }
-  requestcode_->assign(value);
-  // @@protoc_insertion_point(field_set_char:protobufUtils.PGRequest.requestCode)
+  errorinfo_->assign(value);
+  // @@protoc_insertion_point(field_set_char:protobufUtils.PGRequest.errorInfo)
 }
-inline void PGRequest::set_requestcode(const char* value, size_t size) {
-  set_has_requestcode();
-  if (requestcode_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requestcode_ = new ::std::string;
+inline void PGRequest::set_errorinfo(const char* value, size_t size) {
+  set_has_errorinfo();
+  if (errorinfo_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    errorinfo_ = new ::std::string;
   }
-  requestcode_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGRequest.requestCode)
+  errorinfo_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGRequest.errorInfo)
 }
-inline ::std::string* PGRequest::mutable_requestcode() {
-  set_has_requestcode();
-  if (requestcode_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    requestcode_ = new ::std::string;
+inline ::std::string* PGRequest::mutable_errorinfo() {
+  set_has_errorinfo();
+  if (errorinfo_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    errorinfo_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.requestCode)
-  return requestcode_;
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.errorInfo)
+  return errorinfo_;
 }
-inline ::std::string* PGRequest::release_requestcode() {
-  clear_has_requestcode();
-  if (requestcode_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+inline ::std::string* PGRequest::release_errorinfo() {
+  clear_has_errorinfo();
+  if (errorinfo_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
   } else {
-    ::std::string* temp = requestcode_;
-    requestcode_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    ::std::string* temp = errorinfo_;
+    errorinfo_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     return temp;
   }
 }
-inline void PGRequest::set_allocated_requestcode(::std::string* requestcode) {
-  if (requestcode_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete requestcode_;
+inline void PGRequest::set_allocated_errorinfo(::std::string* errorinfo) {
+  if (errorinfo_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete errorinfo_;
   }
-  if (requestcode) {
-    set_has_requestcode();
-    requestcode_ = requestcode;
+  if (errorinfo) {
+    set_has_errorinfo();
+    errorinfo_ = errorinfo;
   } else {
-    clear_has_requestcode();
-    requestcode_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    clear_has_errorinfo();
+    errorinfo_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.requestCode)
+  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.errorInfo)
 }
 
 // optional string username = 3;
@@ -924,7 +810,48 @@ inline void PGRequest::set_allocated_picture(::std::string* picture) {
   // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.picture)
 }
 
-// repeated string picList = 7;
+// optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;
+inline bool PGRequest::has_rankinfo() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void PGRequest::set_has_rankinfo() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void PGRequest::clear_has_rankinfo() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void PGRequest::clear_rankinfo() {
+  if (rankinfo_ != NULL) rankinfo_->::protobufUtils::PGRequest_RankInfo::Clear();
+  clear_has_rankinfo();
+}
+inline const ::protobufUtils::PGRequest_RankInfo& PGRequest::rankinfo() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.rankInfo)
+  return rankinfo_ != NULL ? *rankinfo_ : *default_instance_->rankinfo_;
+}
+inline ::protobufUtils::PGRequest_RankInfo* PGRequest::mutable_rankinfo() {
+  set_has_rankinfo();
+  if (rankinfo_ == NULL) rankinfo_ = new ::protobufUtils::PGRequest_RankInfo;
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.rankInfo)
+  return rankinfo_;
+}
+inline ::protobufUtils::PGRequest_RankInfo* PGRequest::release_rankinfo() {
+  clear_has_rankinfo();
+  ::protobufUtils::PGRequest_RankInfo* temp = rankinfo_;
+  rankinfo_ = NULL;
+  return temp;
+}
+inline void PGRequest::set_allocated_rankinfo(::protobufUtils::PGRequest_RankInfo* rankinfo) {
+  delete rankinfo_;
+  rankinfo_ = rankinfo;
+  if (rankinfo) {
+    set_has_rankinfo();
+  } else {
+    clear_has_rankinfo();
+  }
+  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.rankInfo)
+}
+
+// repeated string picList = 8;
 inline int PGRequest::piclist_size() const {
   return piclist_.size();
 }
@@ -976,47 +903,6 @@ inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 PGRequest::mutable_piclist() {
   // @@protoc_insertion_point(field_mutable_list:protobufUtils.PGRequest.picList)
   return &piclist_;
-}
-
-// optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
-inline bool PGRequest::has_rankinfo() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
-}
-inline void PGRequest::set_has_rankinfo() {
-  _has_bits_[0] |= 0x00000080u;
-}
-inline void PGRequest::clear_has_rankinfo() {
-  _has_bits_[0] &= ~0x00000080u;
-}
-inline void PGRequest::clear_rankinfo() {
-  if (rankinfo_ != NULL) rankinfo_->::protobufUtils::PGRequest_RankInfo::Clear();
-  clear_has_rankinfo();
-}
-inline const ::protobufUtils::PGRequest_RankInfo& PGRequest::rankinfo() const {
-  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.rankInfo)
-  return rankinfo_ != NULL ? *rankinfo_ : *default_instance_->rankinfo_;
-}
-inline ::protobufUtils::PGRequest_RankInfo* PGRequest::mutable_rankinfo() {
-  set_has_rankinfo();
-  if (rankinfo_ == NULL) rankinfo_ = new ::protobufUtils::PGRequest_RankInfo;
-  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.rankInfo)
-  return rankinfo_;
-}
-inline ::protobufUtils::PGRequest_RankInfo* PGRequest::release_rankinfo() {
-  clear_has_rankinfo();
-  ::protobufUtils::PGRequest_RankInfo* temp = rankinfo_;
-  rankinfo_ = NULL;
-  return temp;
-}
-inline void PGRequest::set_allocated_rankinfo(::protobufUtils::PGRequest_RankInfo* rankinfo) {
-  delete rankinfo_;
-  rankinfo_ = rankinfo;
-  if (rankinfo) {
-    set_has_rankinfo();
-  } else {
-    clear_has_rankinfo();
-  }
-  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.rankInfo)
 }
 
 

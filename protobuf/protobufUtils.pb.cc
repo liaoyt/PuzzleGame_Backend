@@ -38,14 +38,14 @@ void protobuf_AssignDesc_protobufUtils_2eproto() {
   GOOGLE_CHECK(file != NULL);
   PGRequest_descriptor_ = file->message_type(0);
   static const int PGRequest_offsets_[8] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, requesttype_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, requestcode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, code_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, errorinfo_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, username_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, password_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, score_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, picture_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, piclist_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, rankinfo_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest, piclist_),
   };
   PGRequest_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -108,13 +108,13 @@ void protobuf_AddDesc_protobufUtils_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023protobufUtils.proto\022\rprotobufUtils\"\355\001\n"
-    "\tPGRequest\022\023\n\013requestType\030\001 \002(\t\022\023\n\013reque"
-    "stCode\030\002 \002(\t\022\020\n\010username\030\003 \001(\t\022\020\n\010passwo"
-    "rd\030\004 \001(\t\022\r\n\005score\030\005 \001(\t\022\017\n\007picture\030\006 \001(\t"
-    "\022\017\n\007picList\030\007 \003(\t\0223\n\010rankInfo\030\010 \001(\0132!.pr"
-    "otobufUtils.PGRequest.RankInfo\032,\n\010RankIn"
-    "fo\022\016\n\006myRank\030\001 \002(\t\022\020\n\010username\030\002 \003(\t", 276);
+    "\n\023protobufUtils.proto\022\rprotobufUtils\"\344\001\n"
+    "\tPGRequest\022\014\n\004Code\030\001 \002(\005\022\021\n\terrorInfo\030\002 "
+    "\001(\t\022\020\n\010username\030\003 \001(\t\022\020\n\010password\030\004 \001(\t\022"
+    "\r\n\005score\030\005 \001(\t\022\017\n\007picture\030\006 \001(\t\0223\n\010rankI"
+    "nfo\030\007 \001(\0132!.protobufUtils.PGRequest.Rank"
+    "Info\022\017\n\007picList\030\010 \003(\t\032,\n\010RankInfo\022\016\n\006myR"
+    "ank\030\001 \002(\005\022\020\n\010username\030\002 \003(\t", 267);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protobufUtils.proto", &protobuf_RegisterTypes);
   PGRequest::default_instance_ = new PGRequest();
@@ -157,7 +157,7 @@ PGRequest_RankInfo::PGRequest_RankInfo(const PGRequest_RankInfo& from)
 void PGRequest_RankInfo::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  myrank_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  myrank_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -167,9 +167,6 @@ PGRequest_RankInfo::~PGRequest_RankInfo() {
 }
 
 void PGRequest_RankInfo::SharedDtor() {
-  if (myrank_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete myrank_;
-  }
   if (this != default_instance_) {
   }
 }
@@ -196,11 +193,7 @@ PGRequest_RankInfo* PGRequest_RankInfo::New() const {
 }
 
 void PGRequest_RankInfo::Clear() {
-  if (has_myrank()) {
-    if (myrank_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-      myrank_->clear();
-    }
-  }
+  myrank_ = 0;
   username_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -216,15 +209,13 @@ bool PGRequest_RankInfo::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string myRank = 1;
+      // required int32 myRank = 1;
       case 1: {
-        if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_myrank()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->myrank().data(), this->myrank().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "myrank");
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &myrank_)));
+          set_has_myrank();
         } else {
           goto handle_unusual;
         }
@@ -276,14 +267,9 @@ failure:
 void PGRequest_RankInfo::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:protobufUtils.PGRequest.RankInfo)
-  // required string myRank = 1;
+  // required int32 myRank = 1;
   if (has_myrank()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->myrank().data(), this->myrank().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "myrank");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->myrank(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->myrank(), output);
   }
 
   // repeated string username = 2;
@@ -306,15 +292,9 @@ void PGRequest_RankInfo::SerializeWithCachedSizes(
 ::google::protobuf::uint8* PGRequest_RankInfo::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:protobufUtils.PGRequest.RankInfo)
-  // required string myRank = 1;
+  // required int32 myRank = 1;
   if (has_myrank()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->myrank().data(), this->myrank().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "myrank");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->myrank(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->myrank(), target);
   }
 
   // repeated string username = 2;
@@ -339,10 +319,10 @@ int PGRequest_RankInfo::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string myRank = 1;
+    // required int32 myRank = 1;
     if (has_myrank()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->myrank());
     }
 
@@ -428,14 +408,14 @@ void PGRequest_RankInfo::Swap(PGRequest_RankInfo* other) {
 // -------------------------------------------------------------------
 
 #ifndef _MSC_VER
-const int PGRequest::kRequestTypeFieldNumber;
-const int PGRequest::kRequestCodeFieldNumber;
+const int PGRequest::kCodeFieldNumber;
+const int PGRequest::kErrorInfoFieldNumber;
 const int PGRequest::kUsernameFieldNumber;
 const int PGRequest::kPasswordFieldNumber;
 const int PGRequest::kScoreFieldNumber;
 const int PGRequest::kPictureFieldNumber;
-const int PGRequest::kPicListFieldNumber;
 const int PGRequest::kRankInfoFieldNumber;
+const int PGRequest::kPicListFieldNumber;
 #endif  // !_MSC_VER
 
 PGRequest::PGRequest()
@@ -458,8 +438,8 @@ PGRequest::PGRequest(const PGRequest& from)
 void PGRequest::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  requesttype_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  requestcode_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  code_ = 0;
+  errorinfo_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   password_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   score_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
@@ -474,11 +454,8 @@ PGRequest::~PGRequest() {
 }
 
 void PGRequest::SharedDtor() {
-  if (requesttype_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete requesttype_;
-  }
-  if (requestcode_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete requestcode_;
+  if (errorinfo_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete errorinfo_;
   }
   if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete username_;
@@ -519,15 +496,11 @@ PGRequest* PGRequest::New() const {
 }
 
 void PGRequest::Clear() {
-  if (_has_bits_[0 / 32] & 191) {
-    if (has_requesttype()) {
-      if (requesttype_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        requesttype_->clear();
-      }
-    }
-    if (has_requestcode()) {
-      if (requestcode_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        requestcode_->clear();
+  if (_has_bits_[0 / 32] & 127) {
+    code_ = 0;
+    if (has_errorinfo()) {
+      if (errorinfo_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        errorinfo_->clear();
       }
     }
     if (has_username()) {
@@ -569,32 +542,30 @@ bool PGRequest::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string requestType = 1;
+      // required int32 Code = 1;
       case 1: {
-        if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_requesttype()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->requesttype().data(), this->requesttype().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "requesttype");
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &code_)));
+          set_has_code();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_requestCode;
+        if (input->ExpectTag(18)) goto parse_errorInfo;
         break;
       }
 
-      // required string requestCode = 2;
+      // optional string errorInfo = 2;
       case 2: {
         if (tag == 18) {
-         parse_requestCode:
+         parse_errorInfo:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_requestcode()));
+                input, this->mutable_errorinfo()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->requestcode().data(), this->requestcode().length(),
+            this->errorinfo().data(), this->errorinfo().length(),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "requestcode");
+            "errorinfo");
         } else {
           goto handle_unusual;
         }
@@ -666,13 +637,26 @@ bool PGRequest::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(58)) goto parse_picList;
+        if (input->ExpectTag(58)) goto parse_rankInfo;
         break;
       }
 
-      // repeated string picList = 7;
+      // optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;
       case 7: {
         if (tag == 58) {
+         parse_rankInfo:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_rankinfo()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(66)) goto parse_picList;
+        break;
+      }
+
+      // repeated string picList = 8;
+      case 8: {
+        if (tag == 66) {
          parse_picList:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->add_piclist()));
@@ -684,20 +668,7 @@ bool PGRequest::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(58)) goto parse_picList;
-        if (input->ExpectTag(66)) goto parse_rankInfo;
-        break;
-      }
-
-      // optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
-      case 8: {
-        if (tag == 66) {
-         parse_rankInfo:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_rankinfo()));
-        } else {
-          goto handle_unusual;
-        }
+        if (input->ExpectTag(66)) goto parse_picList;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -727,24 +698,19 @@ failure:
 void PGRequest::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:protobufUtils.PGRequest)
-  // required string requestType = 1;
-  if (has_requesttype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->requesttype().data(), this->requesttype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "requesttype");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->requesttype(), output);
+  // required int32 Code = 1;
+  if (has_code()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->code(), output);
   }
 
-  // required string requestCode = 2;
-  if (has_requestcode()) {
+  // optional string errorInfo = 2;
+  if (has_errorinfo()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->requestcode().data(), this->requestcode().length(),
+      this->errorinfo().data(), this->errorinfo().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "requestcode");
+      "errorinfo");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->requestcode(), output);
+      2, this->errorinfo(), output);
   }
 
   // optional string username = 3;
@@ -787,20 +753,20 @@ void PGRequest::SerializeWithCachedSizes(
       6, this->picture(), output);
   }
 
-  // repeated string picList = 7;
+  // optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;
+  if (has_rankinfo()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->rankinfo(), output);
+  }
+
+  // repeated string picList = 8;
   for (int i = 0; i < this->piclist_size(); i++) {
   ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
     this->piclist(i).data(), this->piclist(i).length(),
     ::google::protobuf::internal::WireFormat::SERIALIZE,
     "piclist");
     ::google::protobuf::internal::WireFormatLite::WriteString(
-      7, this->piclist(i), output);
-  }
-
-  // optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
-  if (has_rankinfo()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, this->rankinfo(), output);
+      8, this->piclist(i), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -813,26 +779,20 @@ void PGRequest::SerializeWithCachedSizes(
 ::google::protobuf::uint8* PGRequest::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:protobufUtils.PGRequest)
-  // required string requestType = 1;
-  if (has_requesttype()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->requesttype().data(), this->requesttype().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "requesttype");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->requesttype(), target);
+  // required int32 Code = 1;
+  if (has_code()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->code(), target);
   }
 
-  // required string requestCode = 2;
-  if (has_requestcode()) {
+  // optional string errorInfo = 2;
+  if (has_errorinfo()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->requestcode().data(), this->requestcode().length(),
+      this->errorinfo().data(), this->errorinfo().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "requestcode");
+      "errorinfo");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->requestcode(), target);
+        2, this->errorinfo(), target);
   }
 
   // optional string username = 3;
@@ -879,21 +839,21 @@ void PGRequest::SerializeWithCachedSizes(
         6, this->picture(), target);
   }
 
-  // repeated string picList = 7;
+  // optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;
+  if (has_rankinfo()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->rankinfo(), target);
+  }
+
+  // repeated string picList = 8;
   for (int i = 0; i < this->piclist_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->piclist(i).data(), this->piclist(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "piclist");
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(7, this->piclist(i), target);
-  }
-
-  // optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
-  if (has_rankinfo()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        8, this->rankinfo(), target);
+      WriteStringToArray(8, this->piclist(i), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -908,18 +868,18 @@ int PGRequest::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string requestType = 1;
-    if (has_requesttype()) {
+    // required int32 Code = 1;
+    if (has_code()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->requesttype());
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->code());
     }
 
-    // required string requestCode = 2;
-    if (has_requestcode()) {
+    // optional string errorInfo = 2;
+    if (has_errorinfo()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->requestcode());
+          this->errorinfo());
     }
 
     // optional string username = 3;
@@ -950,7 +910,7 @@ int PGRequest::ByteSize() const {
           this->picture());
     }
 
-    // optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
+    // optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;
     if (has_rankinfo()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -958,7 +918,7 @@ int PGRequest::ByteSize() const {
     }
 
   }
-  // repeated string picList = 7;
+  // repeated string picList = 8;
   total_size += 1 * this->piclist_size();
   for (int i = 0; i < this->piclist_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -992,11 +952,11 @@ void PGRequest::MergeFrom(const PGRequest& from) {
   GOOGLE_CHECK_NE(&from, this);
   piclist_.MergeFrom(from.piclist_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_requesttype()) {
-      set_requesttype(from.requesttype());
+    if (from.has_code()) {
+      set_code(from.code());
     }
-    if (from.has_requestcode()) {
-      set_requestcode(from.requestcode());
+    if (from.has_errorinfo()) {
+      set_errorinfo(from.errorinfo());
     }
     if (from.has_username()) {
       set_username(from.username());
@@ -1030,7 +990,7 @@ void PGRequest::CopyFrom(const PGRequest& from) {
 }
 
 bool PGRequest::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   if (has_rankinfo()) {
     if (!this->rankinfo().IsInitialized()) return false;
@@ -1040,14 +1000,14 @@ bool PGRequest::IsInitialized() const {
 
 void PGRequest::Swap(PGRequest* other) {
   if (other != this) {
-    std::swap(requesttype_, other->requesttype_);
-    std::swap(requestcode_, other->requestcode_);
+    std::swap(code_, other->code_);
+    std::swap(errorinfo_, other->errorinfo_);
     std::swap(username_, other->username_);
     std::swap(password_, other->password_);
     std::swap(score_, other->score_);
     std::swap(picture_, other->picture_);
-    piclist_.Swap(&other->piclist_);
     std::swap(rankinfo_, other->rankinfo_);
+    piclist_.Swap(&other->piclist_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

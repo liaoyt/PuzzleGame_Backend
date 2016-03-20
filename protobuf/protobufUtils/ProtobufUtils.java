@@ -13,79 +13,58 @@ public final class ProtobufUtils {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required string requestType = 1;</code>
+     * <code>required int32 Code = 1;</code>
      *
      * <pre>
-     * with values "post" and "get"
+     * for different kind of opration
      * </pre>
      */
-    boolean hasRequestType();
+    boolean hasCode();
     /**
-     * <code>required string requestType = 1;</code>
+     * <code>required int32 Code = 1;</code>
      *
      * <pre>
-     * with values "post" and "get"
+     * for different kind of opration
      * </pre>
      */
-    java.lang.String getRequestType();
-    /**
-     * <code>required string requestType = 1;</code>
-     *
-     * <pre>
-     * with values "post" and "get"
-     * </pre>
-     */
-    com.google.protobuf.ByteString
-        getRequestTypeBytes();
+    int getCode();
 
     /**
-     * <code>required string requestCode = 2;</code>
+     * <code>optional string errorInfo = 2;</code>
      *
      * <pre>
-     * for different kind of infomation
+     * "succed" for a successful post or get, other word for an error 
      * </pre>
      */
-    boolean hasRequestCode();
+    boolean hasErrorInfo();
     /**
-     * <code>required string requestCode = 2;</code>
+     * <code>optional string errorInfo = 2;</code>
      *
      * <pre>
-     * for different kind of infomation
+     * "succed" for a successful post or get, other word for an error 
      * </pre>
      */
-    java.lang.String getRequestCode();
+    java.lang.String getErrorInfo();
     /**
-     * <code>required string requestCode = 2;</code>
+     * <code>optional string errorInfo = 2;</code>
      *
      * <pre>
-     * for different kind of infomation
+     * "succed" for a successful post or get, other word for an error 
      * </pre>
      */
     com.google.protobuf.ByteString
-        getRequestCodeBytes();
+        getErrorInfoBytes();
 
     /**
      * <code>optional string username = 3;</code>
-     *
-     * <pre>
-     * field for type "post"
-     * </pre>
      */
     boolean hasUsername();
     /**
      * <code>optional string username = 3;</code>
-     *
-     * <pre>
-     * field for type "post"
-     * </pre>
      */
     java.lang.String getUsername();
     /**
      * <code>optional string username = 3;</code>
-     *
-     * <pre>
-     * field for type "post"
-     * </pre>
      */
     com.google.protobuf.ByteString
         getUsernameBytes();
@@ -133,36 +112,36 @@ public final class ProtobufUtils {
         getPictureBytes();
 
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
+     */
+    boolean hasRankInfo();
+    /**
+     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
+     */
+    protobufUtils.ProtobufUtils.PGRequest.RankInfo getRankInfo();
+    /**
+     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
+     */
+    protobufUtils.ProtobufUtils.PGRequest.RankInfoOrBuilder getRankInfoOrBuilder();
+
+    /**
+     * <code>repeated string picList = 8;</code>
      */
     com.google.protobuf.ProtocolStringList
         getPicListList();
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>repeated string picList = 8;</code>
      */
     int getPicListCount();
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>repeated string picList = 8;</code>
      */
     java.lang.String getPicList(int index);
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>repeated string picList = 8;</code>
      */
     com.google.protobuf.ByteString
         getPicListBytes(int index);
-
-    /**
-     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
-     */
-    boolean hasRankInfo();
-    /**
-     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
-     */
-    protobufUtils.ProtobufUtils.PGRequest.RankInfo getRankInfo();
-    /**
-     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
-     */
-    protobufUtils.ProtobufUtils.PGRequest.RankInfoOrBuilder getRankInfoOrBuilder();
   }
   /**
    * Protobuf type {@code protobufUtils.PGRequest}
@@ -216,16 +195,15 @@ public final class ProtobufUtils {
               }
               break;
             }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 8: {
               bitField0_ |= 0x00000001;
-              requestType_ = bs;
+              code_ = input.readInt32();
               break;
             }
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              requestCode_ = bs;
+              errorInfo_ = bs;
               break;
             }
             case 26: {
@@ -253,15 +231,6 @@ public final class ProtobufUtils {
               break;
             }
             case 58: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                picList_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              picList_.add(bs);
-              break;
-            }
-            case 66: {
               protobufUtils.ProtobufUtils.PGRequest.RankInfo.Builder subBuilder = null;
               if (((bitField0_ & 0x00000040) == 0x00000040)) {
                 subBuilder = rankInfo_.toBuilder();
@@ -274,6 +243,15 @@ public final class ProtobufUtils {
               bitField0_ |= 0x00000040;
               break;
             }
+            case 66: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+                picList_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000080;
+              }
+              picList_.add(bs);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -282,7 +260,7 @@ public final class ProtobufUtils {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           picList_ = picList_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -321,18 +299,13 @@ public final class ProtobufUtils {
         com.google.protobuf.MessageOrBuilder {
 
       /**
-       * <code>required string myRank = 1;</code>
+       * <code>required int32 myRank = 1;</code>
        */
       boolean hasMyRank();
       /**
-       * <code>required string myRank = 1;</code>
+       * <code>required int32 myRank = 1;</code>
        */
-      java.lang.String getMyRank();
-      /**
-       * <code>required string myRank = 1;</code>
-       */
-      com.google.protobuf.ByteString
-          getMyRankBytes();
+      int getMyRank();
 
       /**
        * <code>repeated string username = 2;</code>
@@ -355,10 +328,6 @@ public final class ProtobufUtils {
     }
     /**
      * Protobuf type {@code protobufUtils.PGRequest.RankInfo}
-     *
-     * <pre>
-     * field for type "get"
-     * </pre>
      */
     public static final class RankInfo extends
         com.google.protobuf.GeneratedMessage implements
@@ -409,10 +378,9 @@ public final class ProtobufUtils {
                 }
                 break;
               }
-              case 10: {
-                com.google.protobuf.ByteString bs = input.readBytes();
+              case 8: {
                 bitField0_ |= 0x00000001;
-                myRank_ = bs;
+                myRank_ = input.readInt32();
                 break;
               }
               case 18: {
@@ -468,45 +436,18 @@ public final class ProtobufUtils {
 
       private int bitField0_;
       public static final int MYRANK_FIELD_NUMBER = 1;
-      private java.lang.Object myRank_;
+      private int myRank_;
       /**
-       * <code>required string myRank = 1;</code>
+       * <code>required int32 myRank = 1;</code>
        */
       public boolean hasMyRank() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string myRank = 1;</code>
+       * <code>required int32 myRank = 1;</code>
        */
-      public java.lang.String getMyRank() {
-        java.lang.Object ref = myRank_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            myRank_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>required string myRank = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMyRankBytes() {
-        java.lang.Object ref = myRank_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          myRank_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+      public int getMyRank() {
+        return myRank_;
       }
 
       public static final int USERNAME_FIELD_NUMBER = 2;
@@ -539,7 +480,7 @@ public final class ProtobufUtils {
       }
 
       private void initFields() {
-        myRank_ = "";
+        myRank_ = 0;
         username_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       }
       private byte memoizedIsInitialized = -1;
@@ -560,7 +501,7 @@ public final class ProtobufUtils {
                           throws java.io.IOException {
         getSerializedSize();
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getMyRankBytes());
+          output.writeInt32(1, myRank_);
         }
         for (int i = 0; i < username_.size(); i++) {
           output.writeBytes(2, username_.getByteString(i));
@@ -576,7 +517,7 @@ public final class ProtobufUtils {
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getMyRankBytes());
+            .computeInt32Size(1, myRank_);
         }
         {
           int dataSize = 0;
@@ -667,10 +608,6 @@ public final class ProtobufUtils {
       }
       /**
        * Protobuf type {@code protobufUtils.PGRequest.RankInfo}
-       *
-       * <pre>
-       * field for type "get"
-       * </pre>
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder> implements
@@ -708,7 +645,7 @@ public final class ProtobufUtils {
 
         public Builder clear() {
           super.clear();
-          myRank_ = "";
+          myRank_ = 0;
           bitField0_ = (bitField0_ & ~0x00000001);
           username_ = com.google.protobuf.LazyStringArrayList.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -766,9 +703,7 @@ public final class ProtobufUtils {
         public Builder mergeFrom(protobufUtils.ProtobufUtils.PGRequest.RankInfo other) {
           if (other == protobufUtils.ProtobufUtils.PGRequest.RankInfo.getDefaultInstance()) return this;
           if (other.hasMyRank()) {
-            bitField0_ |= 0x00000001;
-            myRank_ = other.myRank_;
-            onChanged();
+            setMyRank(other.getMyRank());
           }
           if (!other.username_.isEmpty()) {
             if (username_.isEmpty()) {
@@ -811,78 +746,34 @@ public final class ProtobufUtils {
         }
         private int bitField0_;
 
-        private java.lang.Object myRank_ = "";
+        private int myRank_ ;
         /**
-         * <code>required string myRank = 1;</code>
+         * <code>required int32 myRank = 1;</code>
          */
         public boolean hasMyRank() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
         /**
-         * <code>required string myRank = 1;</code>
+         * <code>required int32 myRank = 1;</code>
          */
-        public java.lang.String getMyRank() {
-          java.lang.Object ref = myRank_;
-          if (!(ref instanceof java.lang.String)) {
-            com.google.protobuf.ByteString bs =
-                (com.google.protobuf.ByteString) ref;
-            java.lang.String s = bs.toStringUtf8();
-            if (bs.isValidUtf8()) {
-              myRank_ = s;
-            }
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
+        public int getMyRank() {
+          return myRank_;
         }
         /**
-         * <code>required string myRank = 1;</code>
+         * <code>required int32 myRank = 1;</code>
          */
-        public com.google.protobuf.ByteString
-            getMyRankBytes() {
-          java.lang.Object ref = myRank_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            myRank_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>required string myRank = 1;</code>
-         */
-        public Builder setMyRank(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+        public Builder setMyRank(int value) {
+          bitField0_ |= 0x00000001;
           myRank_ = value;
           onChanged();
           return this;
         }
         /**
-         * <code>required string myRank = 1;</code>
+         * <code>required int32 myRank = 1;</code>
          */
         public Builder clearMyRank() {
           bitField0_ = (bitField0_ & ~0x00000001);
-          myRank_ = getDefaultInstance().getMyRank();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>required string myRank = 1;</code>
-         */
-        public Builder setMyRankBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          myRank_ = value;
+          myRank_ = 0;
           onChanged();
           return this;
         }
@@ -992,81 +883,50 @@ public final class ProtobufUtils {
     }
 
     private int bitField0_;
-    public static final int REQUESTTYPE_FIELD_NUMBER = 1;
-    private java.lang.Object requestType_;
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
     /**
-     * <code>required string requestType = 1;</code>
+     * <code>required int32 Code = 1;</code>
      *
      * <pre>
-     * with values "post" and "get"
+     * for different kind of opration
      * </pre>
      */
-    public boolean hasRequestType() {
+    public boolean hasCode() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required string requestType = 1;</code>
+     * <code>required int32 Code = 1;</code>
      *
      * <pre>
-     * with values "post" and "get"
+     * for different kind of opration
      * </pre>
      */
-    public java.lang.String getRequestType() {
-      java.lang.Object ref = requestType_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          requestType_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string requestType = 1;</code>
-     *
-     * <pre>
-     * with values "post" and "get"
-     * </pre>
-     */
-    public com.google.protobuf.ByteString
-        getRequestTypeBytes() {
-      java.lang.Object ref = requestType_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        requestType_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getCode() {
+      return code_;
     }
 
-    public static final int REQUESTCODE_FIELD_NUMBER = 2;
-    private java.lang.Object requestCode_;
+    public static final int ERRORINFO_FIELD_NUMBER = 2;
+    private java.lang.Object errorInfo_;
     /**
-     * <code>required string requestCode = 2;</code>
+     * <code>optional string errorInfo = 2;</code>
      *
      * <pre>
-     * for different kind of infomation
+     * "succed" for a successful post or get, other word for an error 
      * </pre>
      */
-    public boolean hasRequestCode() {
+    public boolean hasErrorInfo() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required string requestCode = 2;</code>
+     * <code>optional string errorInfo = 2;</code>
      *
      * <pre>
-     * for different kind of infomation
+     * "succed" for a successful post or get, other word for an error 
      * </pre>
      */
-    public java.lang.String getRequestCode() {
-      java.lang.Object ref = requestCode_;
+    public java.lang.String getErrorInfo() {
+      java.lang.Object ref = errorInfo_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -1074,26 +934,26 @@ public final class ProtobufUtils {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          requestCode_ = s;
+          errorInfo_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>required string requestCode = 2;</code>
+     * <code>optional string errorInfo = 2;</code>
      *
      * <pre>
-     * for different kind of infomation
+     * "succed" for a successful post or get, other word for an error 
      * </pre>
      */
     public com.google.protobuf.ByteString
-        getRequestCodeBytes() {
-      java.lang.Object ref = requestCode_;
+        getErrorInfoBytes() {
+      java.lang.Object ref = errorInfo_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        requestCode_ = b;
+        errorInfo_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -1104,20 +964,12 @@ public final class ProtobufUtils {
     private java.lang.Object username_;
     /**
      * <code>optional string username = 3;</code>
-     *
-     * <pre>
-     * field for type "post"
-     * </pre>
      */
     public boolean hasUsername() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <code>optional string username = 3;</code>
-     *
-     * <pre>
-     * field for type "post"
-     * </pre>
      */
     public java.lang.String getUsername() {
       java.lang.Object ref = username_;
@@ -1135,10 +987,6 @@ public final class ProtobufUtils {
     }
     /**
      * <code>optional string username = 3;</code>
-     *
-     * <pre>
-     * field for type "post"
-     * </pre>
      */
     public com.google.protobuf.ByteString
         getUsernameBytes() {
@@ -1280,65 +1128,65 @@ public final class ProtobufUtils {
       }
     }
 
-    public static final int PICLIST_FIELD_NUMBER = 7;
+    public static final int RANKINFO_FIELD_NUMBER = 7;
+    private protobufUtils.ProtobufUtils.PGRequest.RankInfo rankInfo_;
+    /**
+     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
+     */
+    public boolean hasRankInfo() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
+     */
+    public protobufUtils.ProtobufUtils.PGRequest.RankInfo getRankInfo() {
+      return rankInfo_;
+    }
+    /**
+     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
+     */
+    public protobufUtils.ProtobufUtils.PGRequest.RankInfoOrBuilder getRankInfoOrBuilder() {
+      return rankInfo_;
+    }
+
+    public static final int PICLIST_FIELD_NUMBER = 8;
     private com.google.protobuf.LazyStringList picList_;
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>repeated string picList = 8;</code>
      */
     public com.google.protobuf.ProtocolStringList
         getPicListList() {
       return picList_;
     }
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>repeated string picList = 8;</code>
      */
     public int getPicListCount() {
       return picList_.size();
     }
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>repeated string picList = 8;</code>
      */
     public java.lang.String getPicList(int index) {
       return picList_.get(index);
     }
     /**
-     * <code>repeated string picList = 7;</code>
+     * <code>repeated string picList = 8;</code>
      */
     public com.google.protobuf.ByteString
         getPicListBytes(int index) {
       return picList_.getByteString(index);
     }
 
-    public static final int RANKINFO_FIELD_NUMBER = 8;
-    private protobufUtils.ProtobufUtils.PGRequest.RankInfo rankInfo_;
-    /**
-     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
-     */
-    public boolean hasRankInfo() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
-    }
-    /**
-     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
-     */
-    public protobufUtils.ProtobufUtils.PGRequest.RankInfo getRankInfo() {
-      return rankInfo_;
-    }
-    /**
-     * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
-     */
-    public protobufUtils.ProtobufUtils.PGRequest.RankInfoOrBuilder getRankInfoOrBuilder() {
-      return rankInfo_;
-    }
-
     private void initFields() {
-      requestType_ = "";
-      requestCode_ = "";
+      code_ = 0;
+      errorInfo_ = "";
       username_ = "";
       password_ = "";
       score_ = "";
       picture_ = "";
-      picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       rankInfo_ = protobufUtils.ProtobufUtils.PGRequest.RankInfo.getDefaultInstance();
+      picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1346,11 +1194,7 @@ public final class ProtobufUtils {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasRequestType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasRequestCode()) {
+      if (!hasCode()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -1368,10 +1212,10 @@ public final class ProtobufUtils {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getRequestTypeBytes());
+        output.writeInt32(1, code_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getRequestCodeBytes());
+        output.writeBytes(2, getErrorInfoBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getUsernameBytes());
@@ -1385,11 +1229,11 @@ public final class ProtobufUtils {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeBytes(6, getPictureBytes());
       }
-      for (int i = 0; i < picList_.size(); i++) {
-        output.writeBytes(7, picList_.getByteString(i));
-      }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeMessage(8, rankInfo_);
+        output.writeMessage(7, rankInfo_);
+      }
+      for (int i = 0; i < picList_.size(); i++) {
+        output.writeBytes(8, picList_.getByteString(i));
       }
       getUnknownFields().writeTo(output);
     }
@@ -1402,11 +1246,11 @@ public final class ProtobufUtils {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getRequestTypeBytes());
+          .computeInt32Size(1, code_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getRequestCodeBytes());
+          .computeBytesSize(2, getErrorInfoBytes());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
@@ -1424,6 +1268,10 @@ public final class ProtobufUtils {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(6, getPictureBytes());
       }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, rankInfo_);
+      }
       {
         int dataSize = 0;
         for (int i = 0; i < picList_.size(); i++) {
@@ -1432,10 +1280,6 @@ public final class ProtobufUtils {
         }
         size += dataSize;
         size += 1 * getPicListList().size();
-      }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, rankInfo_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1555,9 +1399,9 @@ public final class ProtobufUtils {
 
       public Builder clear() {
         super.clear();
-        requestType_ = "";
+        code_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        requestCode_ = "";
+        errorInfo_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         username_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -1567,13 +1411,13 @@ public final class ProtobufUtils {
         bitField0_ = (bitField0_ & ~0x00000010);
         picture_ = "";
         bitField0_ = (bitField0_ & ~0x00000020);
-        picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
         if (rankInfoBuilder_ == null) {
           rankInfo_ = protobufUtils.ProtobufUtils.PGRequest.RankInfo.getDefaultInstance();
         } else {
           rankInfoBuilder_.clear();
         }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
@@ -1606,11 +1450,11 @@ public final class ProtobufUtils {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.requestType_ = requestType_;
+        result.code_ = code_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.requestCode_ = requestCode_;
+        result.errorInfo_ = errorInfo_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
@@ -1627,12 +1471,7 @@ public final class ProtobufUtils {
           to_bitField0_ |= 0x00000020;
         }
         result.picture_ = picture_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          picList_ = picList_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000040);
-        }
-        result.picList_ = picList_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
         if (rankInfoBuilder_ == null) {
@@ -1640,6 +1479,11 @@ public final class ProtobufUtils {
         } else {
           result.rankInfo_ = rankInfoBuilder_.build();
         }
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+          picList_ = picList_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000080);
+        }
+        result.picList_ = picList_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1656,14 +1500,12 @@ public final class ProtobufUtils {
 
       public Builder mergeFrom(protobufUtils.ProtobufUtils.PGRequest other) {
         if (other == protobufUtils.ProtobufUtils.PGRequest.getDefaultInstance()) return this;
-        if (other.hasRequestType()) {
-          bitField0_ |= 0x00000001;
-          requestType_ = other.requestType_;
-          onChanged();
+        if (other.hasCode()) {
+          setCode(other.getCode());
         }
-        if (other.hasRequestCode()) {
+        if (other.hasErrorInfo()) {
           bitField0_ |= 0x00000002;
-          requestCode_ = other.requestCode_;
+          errorInfo_ = other.errorInfo_;
           onChanged();
         }
         if (other.hasUsername()) {
@@ -1686,29 +1528,25 @@ public final class ProtobufUtils {
           picture_ = other.picture_;
           onChanged();
         }
+        if (other.hasRankInfo()) {
+          mergeRankInfo(other.getRankInfo());
+        }
         if (!other.picList_.isEmpty()) {
           if (picList_.isEmpty()) {
             picList_ = other.picList_;
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             ensurePicListIsMutable();
             picList_.addAll(other.picList_);
           }
           onChanged();
         }
-        if (other.hasRankInfo()) {
-          mergeRankInfo(other.getRankInfo());
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
-        if (!hasRequestType()) {
-          
-          return false;
-        }
-        if (!hasRequestCode()) {
+        if (!hasCode()) {
           
           return false;
         }
@@ -1740,132 +1578,80 @@ public final class ProtobufUtils {
       }
       private int bitField0_;
 
-      private java.lang.Object requestType_ = "";
+      private int code_ ;
       /**
-       * <code>required string requestType = 1;</code>
+       * <code>required int32 Code = 1;</code>
        *
        * <pre>
-       * with values "post" and "get"
+       * for different kind of opration
        * </pre>
        */
-      public boolean hasRequestType() {
+      public boolean hasCode() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required string requestType = 1;</code>
+       * <code>required int32 Code = 1;</code>
        *
        * <pre>
-       * with values "post" and "get"
+       * for different kind of opration
        * </pre>
        */
-      public java.lang.String getRequestType() {
-        java.lang.Object ref = requestType_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            requestType_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getCode() {
+        return code_;
       }
       /**
-       * <code>required string requestType = 1;</code>
+       * <code>required int32 Code = 1;</code>
        *
        * <pre>
-       * with values "post" and "get"
+       * for different kind of opration
        * </pre>
        */
-      public com.google.protobuf.ByteString
-          getRequestTypeBytes() {
-        java.lang.Object ref = requestType_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          requestType_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string requestType = 1;</code>
-       *
-       * <pre>
-       * with values "post" and "get"
-       * </pre>
-       */
-      public Builder setRequestType(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        requestType_ = value;
+      public Builder setCode(int value) {
+        bitField0_ |= 0x00000001;
+        code_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string requestType = 1;</code>
+       * <code>required int32 Code = 1;</code>
        *
        * <pre>
-       * with values "post" and "get"
+       * for different kind of opration
        * </pre>
        */
-      public Builder clearRequestType() {
+      public Builder clearCode() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        requestType_ = getDefaultInstance().getRequestType();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string requestType = 1;</code>
-       *
-       * <pre>
-       * with values "post" and "get"
-       * </pre>
-       */
-      public Builder setRequestTypeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        requestType_ = value;
+        code_ = 0;
         onChanged();
         return this;
       }
 
-      private java.lang.Object requestCode_ = "";
+      private java.lang.Object errorInfo_ = "";
       /**
-       * <code>required string requestCode = 2;</code>
+       * <code>optional string errorInfo = 2;</code>
        *
        * <pre>
-       * for different kind of infomation
+       * "succed" for a successful post or get, other word for an error 
        * </pre>
        */
-      public boolean hasRequestCode() {
+      public boolean hasErrorInfo() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required string requestCode = 2;</code>
+       * <code>optional string errorInfo = 2;</code>
        *
        * <pre>
-       * for different kind of infomation
+       * "succed" for a successful post or get, other word for an error 
        * </pre>
        */
-      public java.lang.String getRequestCode() {
-        java.lang.Object ref = requestCode_;
+      public java.lang.String getErrorInfo() {
+        java.lang.Object ref = errorInfo_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
-            requestCode_ = s;
+            errorInfo_ = s;
           }
           return s;
         } else {
@@ -1873,69 +1659,69 @@ public final class ProtobufUtils {
         }
       }
       /**
-       * <code>required string requestCode = 2;</code>
+       * <code>optional string errorInfo = 2;</code>
        *
        * <pre>
-       * for different kind of infomation
+       * "succed" for a successful post or get, other word for an error 
        * </pre>
        */
       public com.google.protobuf.ByteString
-          getRequestCodeBytes() {
-        java.lang.Object ref = requestCode_;
+          getErrorInfoBytes() {
+        java.lang.Object ref = errorInfo_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          requestCode_ = b;
+          errorInfo_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>required string requestCode = 2;</code>
+       * <code>optional string errorInfo = 2;</code>
        *
        * <pre>
-       * for different kind of infomation
+       * "succed" for a successful post or get, other word for an error 
        * </pre>
        */
-      public Builder setRequestCode(
+      public Builder setErrorInfo(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        requestCode_ = value;
+        errorInfo_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required string requestCode = 2;</code>
+       * <code>optional string errorInfo = 2;</code>
        *
        * <pre>
-       * for different kind of infomation
+       * "succed" for a successful post or get, other word for an error 
        * </pre>
        */
-      public Builder clearRequestCode() {
+      public Builder clearErrorInfo() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        requestCode_ = getDefaultInstance().getRequestCode();
+        errorInfo_ = getDefaultInstance().getErrorInfo();
         onChanged();
         return this;
       }
       /**
-       * <code>required string requestCode = 2;</code>
+       * <code>optional string errorInfo = 2;</code>
        *
        * <pre>
-       * for different kind of infomation
+       * "succed" for a successful post or get, other word for an error 
        * </pre>
        */
-      public Builder setRequestCodeBytes(
+      public Builder setErrorInfoBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        requestCode_ = value;
+        errorInfo_ = value;
         onChanged();
         return this;
       }
@@ -1943,20 +1729,12 @@ public final class ProtobufUtils {
       private java.lang.Object username_ = "";
       /**
        * <code>optional string username = 3;</code>
-       *
-       * <pre>
-       * field for type "post"
-       * </pre>
        */
       public boolean hasUsername() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <code>optional string username = 3;</code>
-       *
-       * <pre>
-       * field for type "post"
-       * </pre>
        */
       public java.lang.String getUsername() {
         java.lang.Object ref = username_;
@@ -1974,10 +1752,6 @@ public final class ProtobufUtils {
       }
       /**
        * <code>optional string username = 3;</code>
-       *
-       * <pre>
-       * field for type "post"
-       * </pre>
        */
       public com.google.protobuf.ByteString
           getUsernameBytes() {
@@ -1994,10 +1768,6 @@ public final class ProtobufUtils {
       }
       /**
        * <code>optional string username = 3;</code>
-       *
-       * <pre>
-       * field for type "post"
-       * </pre>
        */
       public Builder setUsername(
           java.lang.String value) {
@@ -2011,10 +1781,6 @@ public final class ProtobufUtils {
       }
       /**
        * <code>optional string username = 3;</code>
-       *
-       * <pre>
-       * field for type "post"
-       * </pre>
        */
       public Builder clearUsername() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -2024,10 +1790,6 @@ public final class ProtobufUtils {
       }
       /**
        * <code>optional string username = 3;</code>
-       *
-       * <pre>
-       * field for type "post"
-       * </pre>
        */
       public Builder setUsernameBytes(
           com.google.protobuf.ByteString value) {
@@ -2268,110 +2030,17 @@ public final class ProtobufUtils {
         return this;
       }
 
-      private com.google.protobuf.LazyStringList picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensurePicListIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          picList_ = new com.google.protobuf.LazyStringArrayList(picList_);
-          bitField0_ |= 0x00000040;
-         }
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getPicListList() {
-        return picList_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public int getPicListCount() {
-        return picList_.size();
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public java.lang.String getPicList(int index) {
-        return picList_.get(index);
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public com.google.protobuf.ByteString
-          getPicListBytes(int index) {
-        return picList_.getByteString(index);
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public Builder setPicList(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensurePicListIsMutable();
-        picList_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public Builder addPicList(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensurePicListIsMutable();
-        picList_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public Builder addAllPicList(
-          java.lang.Iterable<java.lang.String> values) {
-        ensurePicListIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, picList_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public Builder clearPicList() {
-        picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string picList = 7;</code>
-       */
-      public Builder addPicListBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensurePicListIsMutable();
-        picList_.add(value);
-        onChanged();
-        return this;
-      }
-
       private protobufUtils.ProtobufUtils.PGRequest.RankInfo rankInfo_ = protobufUtils.ProtobufUtils.PGRequest.RankInfo.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           protobufUtils.ProtobufUtils.PGRequest.RankInfo, protobufUtils.ProtobufUtils.PGRequest.RankInfo.Builder, protobufUtils.ProtobufUtils.PGRequest.RankInfoOrBuilder> rankInfoBuilder_;
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public boolean hasRankInfo() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public protobufUtils.ProtobufUtils.PGRequest.RankInfo getRankInfo() {
         if (rankInfoBuilder_ == null) {
@@ -2381,7 +2050,7 @@ public final class ProtobufUtils {
         }
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public Builder setRankInfo(protobufUtils.ProtobufUtils.PGRequest.RankInfo value) {
         if (rankInfoBuilder_ == null) {
@@ -2393,11 +2062,11 @@ public final class ProtobufUtils {
         } else {
           rankInfoBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public Builder setRankInfo(
           protobufUtils.ProtobufUtils.PGRequest.RankInfo.Builder builderForValue) {
@@ -2407,15 +2076,15 @@ public final class ProtobufUtils {
         } else {
           rankInfoBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public Builder mergeRankInfo(protobufUtils.ProtobufUtils.PGRequest.RankInfo value) {
         if (rankInfoBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
               rankInfo_ != protobufUtils.ProtobufUtils.PGRequest.RankInfo.getDefaultInstance()) {
             rankInfo_ =
               protobufUtils.ProtobufUtils.PGRequest.RankInfo.newBuilder(rankInfo_).mergeFrom(value).buildPartial();
@@ -2426,11 +2095,11 @@ public final class ProtobufUtils {
         } else {
           rankInfoBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public Builder clearRankInfo() {
         if (rankInfoBuilder_ == null) {
@@ -2439,19 +2108,19 @@ public final class ProtobufUtils {
         } else {
           rankInfoBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public protobufUtils.ProtobufUtils.PGRequest.RankInfo.Builder getRankInfoBuilder() {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         onChanged();
         return getRankInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       public protobufUtils.ProtobufUtils.PGRequest.RankInfoOrBuilder getRankInfoOrBuilder() {
         if (rankInfoBuilder_ != null) {
@@ -2461,7 +2130,7 @@ public final class ProtobufUtils {
         }
       }
       /**
-       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
+       * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           protobufUtils.ProtobufUtils.PGRequest.RankInfo, protobufUtils.ProtobufUtils.PGRequest.RankInfo.Builder, protobufUtils.ProtobufUtils.PGRequest.RankInfoOrBuilder> 
@@ -2475,6 +2144,99 @@ public final class ProtobufUtils {
           rankInfo_ = null;
         }
         return rankInfoBuilder_;
+      }
+
+      private com.google.protobuf.LazyStringList picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensurePicListIsMutable() {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+          picList_ = new com.google.protobuf.LazyStringArrayList(picList_);
+          bitField0_ |= 0x00000080;
+         }
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getPicListList() {
+        return picList_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public int getPicListCount() {
+        return picList_.size();
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public java.lang.String getPicList(int index) {
+        return picList_.get(index);
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPicListBytes(int index) {
+        return picList_.getByteString(index);
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public Builder setPicList(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensurePicListIsMutable();
+        picList_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public Builder addPicList(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensurePicListIsMutable();
+        picList_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public Builder addAllPicList(
+          java.lang.Iterable<java.lang.String> values) {
+        ensurePicListIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, picList_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public Builder clearPicList() {
+        picList_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string picList = 8;</code>
+       */
+      public Builder addPicListBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensurePicListIsMutable();
+        picList_.add(value);
+        onChanged();
+        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:protobufUtils.PGRequest)
@@ -2507,13 +2269,13 @@ public final class ProtobufUtils {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023protobufUtils.proto\022\rprotobufUtils\"\355\001\n" +
-      "\tPGRequest\022\023\n\013requestType\030\001 \002(\t\022\023\n\013reque" +
-      "stCode\030\002 \002(\t\022\020\n\010username\030\003 \001(\t\022\020\n\010passwo" +
-      "rd\030\004 \001(\t\022\r\n\005score\030\005 \001(\t\022\017\n\007picture\030\006 \001(\t" +
-      "\022\017\n\007picList\030\007 \003(\t\0223\n\010rankInfo\030\010 \001(\0132!.pr" +
-      "otobufUtils.PGRequest.RankInfo\032,\n\010RankIn" +
-      "fo\022\016\n\006myRank\030\001 \002(\t\022\020\n\010username\030\002 \003(\t"
+      "\n\023protobufUtils.proto\022\rprotobufUtils\"\344\001\n" +
+      "\tPGRequest\022\014\n\004Code\030\001 \002(\005\022\021\n\terrorInfo\030\002 " +
+      "\001(\t\022\020\n\010username\030\003 \001(\t\022\020\n\010password\030\004 \001(\t\022" +
+      "\r\n\005score\030\005 \001(\t\022\017\n\007picture\030\006 \001(\t\0223\n\010rankI" +
+      "nfo\030\007 \001(\0132!.protobufUtils.PGRequest.Rank" +
+      "Info\022\017\n\007picList\030\010 \003(\t\032,\n\010RankInfo\022\016\n\006myR" +
+      "ank\030\001 \002(\005\022\020\n\010username\030\002 \003(\t"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2532,7 +2294,7 @@ public final class ProtobufUtils {
     internal_static_protobufUtils_PGRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobufUtils_PGRequest_descriptor,
-        new java.lang.String[] { "RequestType", "RequestCode", "Username", "Password", "Score", "Picture", "PicList", "RankInfo", });
+        new java.lang.String[] { "Code", "ErrorInfo", "Username", "Password", "Score", "Picture", "RankInfo", "PicList", });
     internal_static_protobufUtils_PGRequest_RankInfo_descriptor =
       internal_static_protobufUtils_PGRequest_descriptor.getNestedTypes().get(0);
     internal_static_protobufUtils_PGRequest_RankInfo_fieldAccessorTable = new

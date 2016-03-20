@@ -6,7 +6,7 @@
 using namespace std;
 
 MYSQL mysql;
-char *msg = new char[1025];
+char *msg = new char[1024];
 
 void connectMysql()
 {
@@ -14,7 +14,40 @@ void connectMysql()
 	mysql_real_connect(&mysql, "localhost", "root", "st6rangie", "note", 3306, NULL, 0);
 }
 
+void signup()
+{
 
+}
+
+void login()
+{
+
+}
+
+void postScore()
+{
+
+}
+
+void postPicture()
+{
+
+}
+
+void getRank()
+{
+
+}
+
+void getPicList()
+{
+
+}
+
+void getExactPic()
+{
+
+}
 
 void closeConnect()
 {

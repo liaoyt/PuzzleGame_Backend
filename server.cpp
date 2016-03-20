@@ -21,8 +21,13 @@
 using namespace std;
 
 extern void connectMysql();
-extern void getItem(string id);
-extern void getItemList();
+extern void signup();
+extern void login();
+extern void postScore();
+extern void postPicture();
+extern void getRank();
+extern void getPicList();
+extern void getExactPic();
 extern void closeConnect();
 extern char* msg;
 
@@ -34,16 +39,42 @@ int setnonblocking(int sockfd) {
 	return 0;
 }
 
-void genMsg(protobufUtils::PGRequest request){
+void handle_massage(protobufUtils::PGRequest &request)
+{
 	memset(msg, 0, sizeof(char)*MAXBUF);
-	request.set_picture("this is a picture");
-	request.SerializeToArray(msg, MAXBUF);
 
-	printf("%s\n", msg);
+	switch(request.code())
+	{
+		case 0:		// 注册
+			signup();
+			break;
+		case 1:		// 登陆
+			login();
+			break;
+		case 2:		// 上传得分
+			postScore();
+			break;
+		case 3:		// 上传照片
+			postPicture();
+			break;
+		case 4:		// 排名
+			getRank();
+			break;
+		case 5:		// 自定义照片列表
+			getPicList();
+			break;
+		case 6:		// 选取特定照片
+			getExactPic();
+			break;
+		default:
+			request.set_errorinfo("No such type of requestion!");
+			request.SerializeToArray(msg, MAXBUF);
+			break;
+	}
 }
 
-/* handle_message - 处理每个 socket 上的消息收发*/
-int handle_message(int new_fd) {
+/* handle_socket - 处理每个 socket 上的消息收发*/
+int handle_socket(int new_fd) {
 	char buf[MAXBUF];
 	int len;
 	bzero(buf, MAXBUF);
@@ -55,12 +86,11 @@ int handle_message(int new_fd) {
 		       new_fd, buf, len);
 		protobufUtils::PGRequest request;
 		request.ParseFromArray(buf, strlen(buf));
-		printf("%s\n", request.requesttype().c_str());
-		printf("%s\n", request.requestcode().c_str());
-		
-		genMsg(request);
-		
-		// 写回客户端
+		printf("%d\n", request.code());
+
+		handle_massage(request);
+		printf("%s\n", msg);
+		// printf("%d\n", strlen(msg));
 		write(new_fd, msg, strlen(msg));
 	}
 	else {
@@ -166,7 +196,7 @@ int main() {
 				curfds++;
 			}
 			else {
-				ret = handle_message(events[n].data.fd);
+				ret = handle_socket(events[n].data.fd);
 				if (ret < 1 && errno != 11) {
 					epoll_ctl(kdpfd, EPOLL_CTL_DEL, events[n].data.fd, &ev);
 					curfds--;
