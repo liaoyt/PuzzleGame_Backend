@@ -40,6 +40,8 @@ void signup(const string username, const string password, const string nickname)
 		PGRt.set_code("301");
 		PGRt.set_errorinfo("Username has been used!");
 	}
+
+	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
 }
 
@@ -47,15 +49,13 @@ void login(const string username, const string password)
 {
 	protobufUtils::PGRequest PGRt;
 
-	printf("%s\n", username.c_str());
-	printf("%s\n", password.c_str());
-
 	MYSQL_RES *result = NULL;
 	string sql = "select * from User where username = '"
 	             + username + "';";
 	mysql_query(&mysql, sql.c_str());
 	result = mysql_store_result(&mysql);
 	int rowcnt = mysql_num_rows(result);
+
 	if (rowcnt == 0)
 	{
 		PGRt.set_code("302");
@@ -67,12 +67,14 @@ void login(const string username, const string password)
 		if (strcmp(row[1], password.c_str()) == 0) {
 			PGRt.set_code("666");
 			PGRt.set_errorinfo("succed");
+			PGRt.set_score(row[3]);
 		} else {
 			PGRt.set_code("303");
 			PGRt.set_errorinfo("password error");
 		}
 	}
 
+	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
 }
 
@@ -80,13 +82,17 @@ void postScore(const string username, const string score)
 {
 	protobufUtils::PGRequest PGRt;
 
-	printf("%s\n", username.c_str());
-	printf("%s\n", score.c_str());
+	string sql = "update User set score = " + score + " where username = '" + username + "';";
+	// MYSQL_RES *result = NULL;
+	if (mysql_query(&mysql, sql.c_str()) == 0) {
+		PGRt.set_code("666");
+		PGRt.set_errorinfo("succed");
+	} else {
+		PGRt.set_code("304");
+		PGRt.set_errorinfo("Update error!");
+	}
 
-
-	PGRt.set_code("666");
-	PGRt.set_errorinfo("succed");
-
+	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
 }
 
@@ -101,13 +107,40 @@ void postPicture(const string username, const string picture)
 	PGRt.set_code("666");
 	PGRt.set_errorinfo("succed");
 
+	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
 }
 
-void getRank()
+void getRank(const string score)
 {
 	protobufUtils::PGRequest PGRt;
 
+	printf("%s\n", score.c_str());
+
+	string sql = "select nickname, score from User order by score desc limit 15;";
+	MYSQL_RES *result = NULL;
+	mysql_query(&mysql, sql.c_str());
+	result = mysql_store_result(&mysql);
+	MYSQL_ROW row = NULL;
+	int rowcnt = mysql_num_rows(result);
+	printf("%d\n", rowcnt);
+
+	protobufUtils::PGRequest_RankInfo * rankinfo = PGRt.mutable_rankinfo();
+
+	if(rowcnt >= 15) rowcnt = 15;
+	while(rowcnt --) {
+	    row = mysql_fetch_row(result);
+	    printf("%s\t%s\n", row[0], row[1]);
+	    rankinfo->add_topuser(row[0]);
+	    rankinfo->add_topscore(row[1]);
+	}
+
+	sql = "select count(*) from User where score >= " + score;
+	mysql_query(&mysql, sql.c_str());
+	result = mysql_store_result(&mysql);
+	row = mysql_fetch_row(result);
+	printf("%s\n", row[0]);
+	rankinfo->set_myrank(row[0]);
 
 	PGRt.set_code("666");
 	PGRt.set_errorinfo("succed");
@@ -123,6 +156,7 @@ void getPicList()
 	PGRt.set_code("666");
 	PGRt.set_errorinfo("succed");
 
+	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
 }
 
@@ -134,6 +168,7 @@ void getExactPic(const string pictureID)
 	PGRt.set_code("666");
 	PGRt.set_errorinfo("succed");
 
+	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
 }
 

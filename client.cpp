@@ -66,8 +66,8 @@ void test1()
 	// genarate test msg
 	protobufUtils::PGRequest request;
 	request.set_code("1");
-	request.set_username("nobody");
-	request.set_password("errorpasswd");
+	request.set_username("liaoyt1");
+	request.set_password("liaoyt2");
 
 	request.CheckInitialized();
 	printf("%s\n", "request OK");
@@ -83,6 +83,7 @@ void test1()
 	printf("%s\n", "backInfo OK");
 
 	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.score().c_str());
 		printf("%s\n", backInfo.errorinfo().c_str());
 	}
 }
@@ -153,10 +154,11 @@ void test4()
 	memset(msg, 0, sizeof(char)*1024);
 	memset(buf, 0, sizeof(char)*1024);
 
-	printf("Test for postPicture:\n");
+	printf("Test for getRank:\n");
 	// genarate test msg
 	protobufUtils::PGRequest request;
 	request.set_code("4");
+	request.set_score("23333");
 
 	request.CheckInitialized();
 	printf("%s\n", "request OK");
@@ -173,6 +175,8 @@ void test4()
 
 	if (backInfo.has_errorinfo()) {
 		printf("%s\n", backInfo.errorinfo().c_str());
+		printf("%s\n", backInfo.rankinfo().myrank().c_str());
+		printf("%s\n", backInfo.rankinfo().topscore(0).c_str());
 	}
 }
 
@@ -258,10 +262,10 @@ int main()
 
 	// test0();	// passed
 	// test1();	// passed
-	// test2();
+	// test2();	// passed
 	// test3();
-	// test4();
-	// test5();
+	// test4();	// passed
+	test5();
 	// test6();
 
 

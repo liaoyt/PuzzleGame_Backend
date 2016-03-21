@@ -25,7 +25,7 @@ extern void signup(const string username, const string password, const string ni
 extern void login(const string username, const string password);
 extern void postScore(const string username, const string score);
 extern void postPicture(const string username, const string picture);
-extern void getRank();
+extern void getRank(const string score);
 extern void getPicList();
 extern void getExactPic(const string pictureID);
 extern void closeConnect();
@@ -73,7 +73,10 @@ void handle_massage(protobufUtils::PGRequest &request)
 		else
 			MissingField();
 	} else if (strcmp(request.code().c_str(), "4") == 0) { 		// 排名
-		getRank();
+		if (request.has_score())
+			getRank(request.score());
+		else
+			MissingField();
 	} else if (strcmp(request.code().c_str(), "5") == 0) {		// 自定义照片列表
 		getPicList();
 	} else if (strcmp(request.code().c_str(), "6") == 0) {		// 选取特定照片
@@ -81,7 +84,7 @@ void handle_massage(protobufUtils::PGRequest &request)
 			getExactPic(request.picturesid(0));
 		else
 			MissingField();
-	}else {							// 请求码错误
+	} else {							// 请求码错误
 		protobufUtils::PGRequest error;
 		error.set_code("444");
 		error.set_errorinfo("No such type of requestion!");
@@ -105,7 +108,6 @@ int handle_socket(int new_fd) {
 		request.ParseFromArray(buf, len);
 		// request.ParseFromString(string(buf));
 		request.CheckInitialized();
-		printf("%s\n", request.code().c_str());
 
 		handle_massage(request);
 		printf("%s\n", msg);
