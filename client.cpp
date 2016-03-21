@@ -14,12 +14,231 @@
 
 using namespace std;
 
+string str;
+char msg[1024];
+char buf[1024];
+
+int sockfd;
+int len;
+int result;
+
+void test0()
+{
+	memset(msg, 0, sizeof(char)*1024);
+	memset(buf, 0, sizeof(char)*1024);
+
+	printf("Test for signup:\n");
+	// genarate test msg
+	protobufUtils::PGRequest request;
+	request.set_code("0");
+	request.set_username("zaishiyici");
+	request.set_password("nimabi");
+	request.set_nickname("liaoyt3");
+
+	request.CheckInitialized();
+	printf("%s\n", "request OK");
+	// request.SerializeToString(&str);
+	request.SerializeToArray(msg, 1024);
+
+	// send the msg to the server
+	write(sockfd, msg, strlen(msg));
+	len = read(sockfd, buf, 1024);
+
+	// write(sockfd, str.c_str(), str.length());
+	// len = read(sockfd, buf, 1024);
+
+	protobufUtils::PGRequest backInfo;
+	backInfo.ParseFromArray(buf, len);
+	backInfo.CheckInitialized();
+	printf("%s\n", "backInfo OK");
+
+	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.errorinfo().c_str());
+	}
+}
+
+void test1()
+{
+	memset(msg, 0, sizeof(char)*1024);
+	memset(buf, 0, sizeof(char)*1024);
+
+	printf("Test for login:\n");
+	// genarate test msg
+	protobufUtils::PGRequest request;
+	request.set_code("1");
+	request.set_username("nobody");
+	request.set_password("errorpasswd");
+
+	request.CheckInitialized();
+	printf("%s\n", "request OK");
+	request.SerializeToArray(msg, 1024);
+
+	// send the msg to the server
+	write(sockfd, msg, strlen(msg));
+	len = read(sockfd, buf, 1024);
+
+	protobufUtils::PGRequest backInfo;
+	backInfo.ParseFromArray(buf, len);
+	backInfo.CheckInitialized();
+	printf("%s\n", "backInfo OK");
+
+	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.errorinfo().c_str());
+	}
+}
+
+void test2()
+{
+	memset(msg, 0, sizeof(char)*1024);
+	memset(buf, 0, sizeof(char)*1024);
+
+	printf("Test for postScore:\n");
+	// genarate test msg
+	protobufUtils::PGRequest request;
+	request.set_code("2");
+	request.set_username("liaoyt1");
+	request.set_score("23333");
+
+	request.CheckInitialized();
+	printf("%s\n", "request OK");
+	request.SerializeToArray(msg, 1024);
+
+	// send the msg to the server
+	write(sockfd, msg, strlen(msg));
+	len = read(sockfd, buf, 1024);
+
+	protobufUtils::PGRequest backInfo;
+	backInfo.ParseFromArray(buf, len);
+	backInfo.CheckInitialized();
+	printf("%s\n", "backInfo OK");
+
+	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.errorinfo().c_str());
+	}
+}
+
+void test3()
+{
+	memset(msg, 0, sizeof(char)*1024);
+	memset(buf, 0, sizeof(char)*1024);
+
+	printf("Test for postPicture:\n");
+	// genarate test msg
+	protobufUtils::PGRequest request;
+	request.set_code("3");
+	request.set_username("liaoyt1");
+	request.set_pictures(0, "picture1");
+
+	request.CheckInitialized();
+	printf("%s\n", "request OK");
+	request.SerializeToArray(msg, 1024);
+
+	// send the msg to the server
+	write(sockfd, msg, strlen(msg));
+	len = read(sockfd, buf, 1024);
+
+	protobufUtils::PGRequest backInfo;
+	backInfo.ParseFromArray(buf, len);
+	backInfo.CheckInitialized();
+	printf("%s\n", "backInfo OK");
+
+	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.errorinfo().c_str());
+	}
+}
+
+
+void test4()
+{
+	memset(msg, 0, sizeof(char)*1024);
+	memset(buf, 0, sizeof(char)*1024);
+
+	printf("Test for postPicture:\n");
+	// genarate test msg
+	protobufUtils::PGRequest request;
+	request.set_code("4");
+
+	request.CheckInitialized();
+	printf("%s\n", "request OK");
+	request.SerializeToArray(msg, 1024);
+
+	// send the msg to the server
+	write(sockfd, msg, strlen(msg));
+	len = read(sockfd, buf, 1024);
+
+	protobufUtils::PGRequest backInfo;
+	backInfo.ParseFromArray(buf, len);
+	backInfo.CheckInitialized();
+	printf("%s\n", "backInfo OK");
+
+	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.errorinfo().c_str());
+	}
+}
+
+void test5()
+{
+	memset(msg, 0, sizeof(char)*1024);
+	memset(buf, 0, sizeof(char)*1024);
+
+	printf("Test for getPicList:\n");
+	// genarate test msg
+	protobufUtils::PGRequest request;
+	request.set_code("5");
+
+	request.CheckInitialized();
+	printf("%s\n", "request OK");
+	request.SerializeToArray(msg, 1024);
+
+	// send the msg to the server
+	write(sockfd, msg, strlen(msg));
+	len = read(sockfd, buf, 1024);
+
+	protobufUtils::PGRequest backInfo;
+	backInfo.ParseFromArray(buf, len);
+	backInfo.CheckInitialized();
+	printf("%s\n", "backInfo OK");
+
+	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.errorinfo().c_str());
+	}
+}
+
+void test6()
+{
+	memset(msg, 0, sizeof(char)*1024);
+	memset(buf, 0, sizeof(char)*1024);
+
+	printf("Test for getExactPic:\n");
+	// genarate test msg
+	protobufUtils::PGRequest request;
+	request.set_code("6");
+	request.set_picturesid(0, "1");
+
+	request.CheckInitialized();
+	printf("%s\n", "request OK");
+	request.SerializeToArray(msg, 1024);
+
+	// send the msg to the server
+	write(sockfd, msg, strlen(msg));
+	len = read(sockfd, buf, 1024);
+
+	protobufUtils::PGRequest backInfo;
+	backInfo.ParseFromArray(buf, len);
+	backInfo.CheckInitialized();
+	printf("%s\n", "backInfo OK");
+
+	if (backInfo.has_errorinfo()) {
+		printf("%s\n", backInfo.errorinfo().c_str());
+	}
+}
+
+
 int main()
 {
-	int sockfd;
-	int len;
+
 	struct sockaddr_in address;
-	int result;
+
 
 	/* Create a socket for the client. */
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -37,33 +256,15 @@ int main()
 		exit(1);
 	}
 
-	char msg[1024];
-	char buf[1024];
+	// test0();	// passed
+	// test1();	// passed
+	// test2();
+	// test3();
+	// test4();
+	// test5();
+	// test6();
 
-	printf("Test for MIL:\n");
-	// genarate test msg
-	protobufUtils::PGRequest request;
-	request.set_code(10);
-	printf("%s\n", "check request:");
-	request.CheckInitialized();
-	printf("%s\n", "request OK");
-	request.SerializeToArray(msg, 1024);
 
-	// send the msg to the server
-	write(sockfd, msg, strlen(msg));
-	len = read(sockfd, buf, 1024);
-
-	protobufUtils::PGRequest backInfo;
-	backInfo.ParseFromArray(buf, len);
-	printf("%s\n", "check backInfo:");
-	backInfo.CheckInitialized();
-	printf("%s\n", "backInfo OK");
-
-	if(backInfo.has_errorinfo()){
-		printf("%s\n", backInfo.errorinfo().c_str());
-	}
-
-	
 	close(sockfd);
 	return 0;
 }

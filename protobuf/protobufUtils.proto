@@ -1,7 +1,7 @@
 package protobufUtils;
 
 message PGRequest {
-	required int32 Code = 1;		// for different kind of opration
+	required string Code = 1;		// for different kind of opration
 	optional string errorInfo = 2;	// "succed" for a successful post or get, other word for an error 
 
 	optional string username = 3;
@@ -9,30 +9,33 @@ message PGRequest {
 
 	optional string score = 5;
 	
-	optional string picture = 6;
+	repeated string pictures= 6;
+	repeated string picturesID = 7;
 
 	message RankInfo {
-		required int32 myRank = 1;
-		repeated string username =2 ;
+		required string myRank = 1;
+		repeated string topUser =2 ;
 	}
-	optional RankInfo rankInfo = 7;
-	
-	repeated string picList = 8;
+	optional RankInfo rankInfo = 8;
 
-	
+	optional string nickname = 9;
 }
 
 // required的字段在任何情况下都必须填写
 // optional的字段在不同的情景下填写相应字段
 // repeated的字段相当于数组
 
-//客户端提交的数据，会有相应的返回值来确认提交结果
-// requestCode = 0：用户登陆，必须填写字段3、4
+// 任何Code的请求都会返回errorInfo，
+// errorInfo="succed"，或者code=666，操作成功
+// 其他类型错误会有说明
+
+// 客户端提交的数据
+// requestCode = 0：用户注册，必须填写字段3、4、9
 // requestCode = 1：用户登陆，必须填写字段3、4
 // requestCode = 2：上传得分，必须填写字段3、5
 // requestCode = 3：上传照片，必须填写字段3、6
 
-//客户端申请数据
-// requestCode = 4：获取排名
-// requestCode = 5：获取其他用户的照片列表
-// requestCode = 6：获取一张选定的照片
+// 客户端申请数据
+// requestCode = 4：获取排名，返回8
+// requestCode = 5：获取其他用户的照片列表，返回6、7
+// requestCode = 6：获取一张选定的照片，须填写7，返回6

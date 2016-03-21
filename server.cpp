@@ -21,13 +21,13 @@
 using namespace std;
 
 extern void connectMysql();
-extern void signup();
-extern void login();
-extern void postScore();
-extern void postPicture();
+extern void signup(const string username, const string password, const string nickname);
+extern void login(const string username, const string password);
+extern void postScore(const string username, const string score);
+extern void postPicture(const string username, const string picture);
 extern void getRank();
 extern void getPicList();
-extern void getExactPic();
+extern void getExactPic(const string pictureID);
 extern void closeConnect();
 extern char* msg;
 
@@ -39,37 +39,53 @@ int setnonblocking(int sockfd) {
 	return 0;
 }
 
+void MissingField() {
+	protobufUtils::PGRequest error;
+	error.set_errorinfo("Missing required field!");
+	error.set_code("400");
+	error.SerializeToArray(msg, MAXBUF);
+}
+
 void handle_massage(protobufUtils::PGRequest &request)
 {
 	memset(msg, 0, sizeof(char)*MAXBUF);
 
-	switch(request.code())
-	{
-		case 0:		// 注册
-			signup();
-			break;
-		case 1:		// 登陆
-			login();
-			break;
-		case 2:		// 上传得分
-			postScore();
-			break;
-		case 3:		// 上传照片
-			postPicture();
-			break;
-		case 4:		// 排名
-			getRank();
-			break;
-		case 5:		// 自定义照片列表
-			getPicList();
-			break;
-		case 6:		// 选取特定照片
-			getExactPic();
-			break;
-		default:
-			request.set_errorinfo("No such type of requestion!");
-			request.SerializeToArray(msg, MAXBUF);
-			break;
+	printf("%s\n", request.code().c_str());
+
+	if (strcmp(request.code().c_str(), "0") == 0) {		// 注册
+		if (request.has_username() && request.has_password() && request.has_nickname())
+			signup(request.username(), request.password(), request.nickname());
+		else
+			MissingField();
+	} else if (strcmp(request.code().c_str(), "1") == 0) {		// 登陆
+		if (request.has_username() && request.has_password())
+			login(request.username(), request.password());
+		else
+			MissingField();
+	} else if (strcmp(request.code().c_str(), "2") == 0) {		// 上传得分
+		if (request.has_score() && request.has_username())
+			postScore(request.username(), request.score());
+		else
+			MissingField();
+	}  else if (strcmp(request.code().c_str(), "3") == 0) {		// 上传照片
+		if (request.has_username() && request.pictures_size() != 0)
+			postPicture(request.username(), request.pictures(0));
+		else
+			MissingField();
+	} else if (strcmp(request.code().c_str(), "4") == 0) { 		// 排名
+		getRank();
+	} else if (strcmp(request.code().c_str(), "5") == 0) {		// 自定义照片列表
+		getPicList();
+	} else if (strcmp(request.code().c_str(), "6") == 0) {		// 选取特定照片
+		if (request.picturesid_size() != 0)
+			getExactPic(request.picturesid(0));
+		else
+			MissingField();
+	}else {							// 请求码错误
+		protobufUtils::PGRequest error;
+		error.set_code("444");
+		error.set_errorinfo("No such type of requestion!");
+		error.SerializeToArray(msg, MAXBUF);
 	}
 }
 
@@ -77,16 +93,19 @@ void handle_massage(protobufUtils::PGRequest &request)
 int handle_socket(int new_fd) {
 	char buf[MAXBUF];
 	int len;
-	bzero(buf, MAXBUF);
 
-	/* 开始处理每个新连接上的数据收发 */
-	len = read(new_fd, buf, sizeof(buf));
+	memset(buf, 0, sizeof(char)*MAXBUF);
+
+	// 开始处理每个新连接上的数据收发
+	len = read(new_fd, buf, MAXBUF);
 	if (len > 0) {
 		printf("%d接收消息成功:'%s',共%d个字节的数据\n",
 		       new_fd, buf, len);
 		protobufUtils::PGRequest request;
-		request.ParseFromArray(buf, strlen(buf));
-		printf("%d\n", request.code());
+		request.ParseFromArray(buf, len);
+		// request.ParseFromString(string(buf));
+		request.CheckInitialized();
+		printf("%s\n", request.code().c_str());
 
 		handle_massage(request);
 		printf("%s\n", msg);
