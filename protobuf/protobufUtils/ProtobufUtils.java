@@ -371,6 +371,25 @@ public final class ProtobufUtils {
        */
       com.google.protobuf.ByteString
           getTopUserBytes(int index);
+
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      com.google.protobuf.ProtocolStringList
+          getTopScoreList();
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      int getTopScoreCount();
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      java.lang.String getTopScore(int index);
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      com.google.protobuf.ByteString
+          getTopScoreBytes(int index);
     }
     /**
      * Protobuf type {@code protobufUtils.PGRequest.RankInfo}
@@ -439,6 +458,15 @@ public final class ProtobufUtils {
                 topUser_.add(bs);
                 break;
               }
+              case 26: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                  topScore_ = new com.google.protobuf.LazyStringArrayList();
+                  mutable_bitField0_ |= 0x00000004;
+                }
+                topScore_.add(bs);
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -449,6 +477,9 @@ public final class ProtobufUtils {
         } finally {
           if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
             topUser_ = topUser_.getUnmodifiableView();
+          }
+          if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+            topScore_ = topScore_.getUnmodifiableView();
           }
           this.unknownFields = unknownFields.build();
           makeExtensionsImmutable();
@@ -553,9 +584,39 @@ public final class ProtobufUtils {
         return topUser_.getByteString(index);
       }
 
+      public static final int TOPSCORE_FIELD_NUMBER = 3;
+      private com.google.protobuf.LazyStringList topScore_;
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getTopScoreList() {
+        return topScore_;
+      }
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      public int getTopScoreCount() {
+        return topScore_.size();
+      }
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      public java.lang.String getTopScore(int index) {
+        return topScore_.get(index);
+      }
+      /**
+       * <code>repeated string topScore = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTopScoreBytes(int index) {
+        return topScore_.getByteString(index);
+      }
+
       private void initFields() {
         myRank_ = "";
         topUser_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        topScore_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -580,6 +641,9 @@ public final class ProtobufUtils {
         for (int i = 0; i < topUser_.size(); i++) {
           output.writeBytes(2, topUser_.getByteString(i));
         }
+        for (int i = 0; i < topScore_.size(); i++) {
+          output.writeBytes(3, topScore_.getByteString(i));
+        }
         getUnknownFields().writeTo(output);
       }
 
@@ -601,6 +665,15 @@ public final class ProtobufUtils {
           }
           size += dataSize;
           size += 1 * getTopUserList().size();
+        }
+        {
+          int dataSize = 0;
+          for (int i = 0; i < topScore_.size(); i++) {
+            dataSize += com.google.protobuf.CodedOutputStream
+              .computeBytesSizeNoTag(topScore_.getByteString(i));
+          }
+          size += dataSize;
+          size += 1 * getTopScoreList().size();
         }
         size += getUnknownFields().getSerializedSize();
         memoizedSerializedSize = size;
@@ -723,6 +796,8 @@ public final class ProtobufUtils {
           bitField0_ = (bitField0_ & ~0x00000001);
           topUser_ = com.google.protobuf.LazyStringArrayList.EMPTY;
           bitField0_ = (bitField0_ & ~0x00000002);
+          topScore_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000004);
           return this;
         }
 
@@ -760,6 +835,11 @@ public final class ProtobufUtils {
             bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.topUser_ = topUser_;
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            topScore_ = topScore_.getUnmodifiableView();
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.topScore_ = topScore_;
           result.bitField0_ = to_bitField0_;
           onBuilt();
           return result;
@@ -788,6 +868,16 @@ public final class ProtobufUtils {
             } else {
               ensureTopUserIsMutable();
               topUser_.addAll(other.topUser_);
+            }
+            onChanged();
+          }
+          if (!other.topScore_.isEmpty()) {
+            if (topScore_.isEmpty()) {
+              topScore_ = other.topScore_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureTopScoreIsMutable();
+              topScore_.addAll(other.topScore_);
             }
             onChanged();
           }
@@ -987,6 +1077,99 @@ public final class ProtobufUtils {
   }
   ensureTopUserIsMutable();
           topUser_.add(value);
+          onChanged();
+          return this;
+        }
+
+        private com.google.protobuf.LazyStringList topScore_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        private void ensureTopScoreIsMutable() {
+          if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+            topScore_ = new com.google.protobuf.LazyStringArrayList(topScore_);
+            bitField0_ |= 0x00000004;
+           }
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public com.google.protobuf.ProtocolStringList
+            getTopScoreList() {
+          return topScore_.getUnmodifiableView();
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public int getTopScoreCount() {
+          return topScore_.size();
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public java.lang.String getTopScore(int index) {
+          return topScore_.get(index);
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public com.google.protobuf.ByteString
+            getTopScoreBytes(int index) {
+          return topScore_.getByteString(index);
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public Builder setTopScore(
+            int index, java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTopScoreIsMutable();
+          topScore_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public Builder addTopScore(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTopScoreIsMutable();
+          topScore_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public Builder addAllTopScore(
+            java.lang.Iterable<java.lang.String> values) {
+          ensureTopScoreIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, topScore_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public Builder clearTopScore() {
+          topScore_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated string topScore = 3;</code>
+         */
+        public Builder addTopScoreBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureTopScoreIsMutable();
+          topScore_.add(value);
           onChanged();
           return this;
         }
@@ -2626,14 +2809,14 @@ public final class ProtobufUtils {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023protobufUtils.proto\022\rprotobufUtils\"\371\001\n" +
+      "\n\023protobufUtils.proto\022\rprotobufUtils\"\213\002\n" +
       "\tPGRequest\022\014\n\004Code\030\001 \002(\t\022\021\n\terrorInfo\030\002 " +
       "\001(\t\022\020\n\010username\030\003 \001(\t\022\020\n\010password\030\004 \001(\t\022" +
       "\r\n\005score\030\005 \001(\t\022\020\n\010pictures\030\006 \003(\t\022\022\n\npict" +
       "uresID\030\007 \003(\t\0223\n\010rankInfo\030\010 \001(\0132!.protobu" +
       "fUtils.PGRequest.RankInfo\022\020\n\010nickname\030\t " +
-      "\001(\t\032+\n\010RankInfo\022\016\n\006myRank\030\001 \002(\t\022\017\n\007topUs" +
-      "er\030\002 \003(\t"
+      "\001(\t\032=\n\010RankInfo\022\016\n\006myRank\030\001 \002(\t\022\017\n\007topUs" +
+      "er\030\002 \003(\t\022\020\n\010topScore\030\003 \003(\t"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2658,7 +2841,7 @@ public final class ProtobufUtils {
     internal_static_protobufUtils_PGRequest_RankInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobufUtils_PGRequest_RankInfo_descriptor,
-        new java.lang.String[] { "MyRank", "TopUser", });
+        new java.lang.String[] { "MyRank", "TopUser", "TopScore", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

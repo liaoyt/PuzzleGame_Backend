@@ -60,9 +60,10 @@ void protobuf_AssignDesc_protobufUtils_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(PGRequest));
   PGRequest_RankInfo_descriptor_ = PGRequest_descriptor_->nested_type(0);
-  static const int PGRequest_RankInfo_offsets_[2] = {
+  static const int PGRequest_RankInfo_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest_RankInfo, myrank_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest_RankInfo, topuser_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PGRequest_RankInfo, topscore_),
   };
   PGRequest_RankInfo_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -109,14 +110,14 @@ void protobuf_AddDesc_protobufUtils_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\023protobufUtils.proto\022\rprotobufUtils\"\371\001\n"
+    "\n\023protobufUtils.proto\022\rprotobufUtils\"\213\002\n"
     "\tPGRequest\022\014\n\004Code\030\001 \002(\t\022\021\n\terrorInfo\030\002 "
     "\001(\t\022\020\n\010username\030\003 \001(\t\022\020\n\010password\030\004 \001(\t\022"
     "\r\n\005score\030\005 \001(\t\022\020\n\010pictures\030\006 \003(\t\022\022\n\npict"
     "uresID\030\007 \003(\t\0223\n\010rankInfo\030\010 \001(\0132!.protobu"
     "fUtils.PGRequest.RankInfo\022\020\n\010nickname\030\t "
-    "\001(\t\032+\n\010RankInfo\022\016\n\006myRank\030\001 \002(\t\022\017\n\007topUs"
-    "er\030\002 \003(\t", 288);
+    "\001(\t\032=\n\010RankInfo\022\016\n\006myRank\030\001 \002(\t\022\017\n\007topUs"
+    "er\030\002 \003(\t\022\020\n\010topScore\030\003 \003(\t", 306);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "protobufUtils.proto", &protobuf_RegisterTypes);
   PGRequest::default_instance_ = new PGRequest();
@@ -138,6 +139,7 @@ struct StaticDescriptorInitializer_protobufUtils_2eproto {
 #ifndef _MSC_VER
 const int PGRequest_RankInfo::kMyRankFieldNumber;
 const int PGRequest_RankInfo::kTopUserFieldNumber;
+const int PGRequest_RankInfo::kTopScoreFieldNumber;
 #endif  // !_MSC_VER
 
 PGRequest_RankInfo::PGRequest_RankInfo()
@@ -204,6 +206,7 @@ void PGRequest_RankInfo::Clear() {
     }
   }
   topuser_.Clear();
+  topscore_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
@@ -249,6 +252,25 @@ bool PGRequest_RankInfo::MergePartialFromCodedStream(
           goto handle_unusual;
         }
         if (input->ExpectTag(18)) goto parse_topUser;
+        if (input->ExpectTag(26)) goto parse_topScore;
+        break;
+      }
+
+      // repeated string topScore = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_topScore:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_topscore()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->topscore(this->topscore_size() - 1).data(),
+            this->topscore(this->topscore_size() - 1).length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "topscore");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_topScore;
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -298,6 +320,16 @@ void PGRequest_RankInfo::SerializeWithCachedSizes(
       2, this->topuser(i), output);
   }
 
+  // repeated string topScore = 3;
+  for (int i = 0; i < this->topscore_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->topscore(i).data(), this->topscore(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "topscore");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->topscore(i), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -329,6 +361,16 @@ void PGRequest_RankInfo::SerializeWithCachedSizes(
       WriteStringToArray(2, this->topuser(i), target);
   }
 
+  // repeated string topScore = 3;
+  for (int i = 0; i < this->topscore_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->topscore(i).data(), this->topscore(i).length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "topscore");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(3, this->topscore(i), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -354,6 +396,13 @@ int PGRequest_RankInfo::ByteSize() const {
   for (int i = 0; i < this->topuser_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
       this->topuser(i));
+  }
+
+  // repeated string topScore = 3;
+  total_size += 1 * this->topscore_size();
+  for (int i = 0; i < this->topscore_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->topscore(i));
   }
 
   if (!unknown_fields().empty()) {
@@ -382,6 +431,7 @@ void PGRequest_RankInfo::MergeFrom(const ::google::protobuf::Message& from) {
 void PGRequest_RankInfo::MergeFrom(const PGRequest_RankInfo& from) {
   GOOGLE_CHECK_NE(&from, this);
   topuser_.MergeFrom(from.topuser_);
+  topscore_.MergeFrom(from.topscore_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_myrank()) {
       set_myrank(from.myrank());
@@ -412,6 +462,7 @@ void PGRequest_RankInfo::Swap(PGRequest_RankInfo* other) {
   if (other != this) {
     std::swap(myrank_, other->myrank_);
     topuser_.Swap(&other->topuser_);
+    topscore_.Swap(&other->topscore_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);

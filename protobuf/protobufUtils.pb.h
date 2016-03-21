@@ -119,6 +119,22 @@ class PGRequest_RankInfo : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& topuser() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_topuser();
 
+  // repeated string topScore = 3;
+  inline int topscore_size() const;
+  inline void clear_topscore();
+  static const int kTopScoreFieldNumber = 3;
+  inline const ::std::string& topscore(int index) const;
+  inline ::std::string* mutable_topscore(int index);
+  inline void set_topscore(int index, const ::std::string& value);
+  inline void set_topscore(int index, const char* value);
+  inline void set_topscore(int index, const char* value, size_t size);
+  inline ::std::string* add_topscore();
+  inline void add_topscore(const ::std::string& value);
+  inline void add_topscore(const char* value);
+  inline void add_topscore(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& topscore() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_topscore();
+
   // @@protoc_insertion_point(class_scope:protobufUtils.PGRequest.RankInfo)
  private:
   inline void set_has_myrank();
@@ -130,6 +146,7 @@ class PGRequest_RankInfo : public ::google::protobuf::Message {
   mutable int _cached_size_;
   ::std::string* myrank_;
   ::google::protobuf::RepeatedPtrField< ::std::string> topuser_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> topscore_;
   friend void  protobuf_AddDesc_protobufUtils_2eproto();
   friend void protobuf_AssignDesc_protobufUtils_2eproto();
   friend void protobuf_ShutdownFile_protobufUtils_2eproto();
@@ -479,6 +496,60 @@ inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 PGRequest_RankInfo::mutable_topuser() {
   // @@protoc_insertion_point(field_mutable_list:protobufUtils.PGRequest.RankInfo.topUser)
   return &topuser_;
+}
+
+// repeated string topScore = 3;
+inline int PGRequest_RankInfo::topscore_size() const {
+  return topscore_.size();
+}
+inline void PGRequest_RankInfo::clear_topscore() {
+  topscore_.Clear();
+}
+inline const ::std::string& PGRequest_RankInfo::topscore(int index) const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.RankInfo.topScore)
+  return topscore_.Get(index);
+}
+inline ::std::string* PGRequest_RankInfo::mutable_topscore(int index) {
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.RankInfo.topScore)
+  return topscore_.Mutable(index);
+}
+inline void PGRequest_RankInfo::set_topscore(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.RankInfo.topScore)
+  topscore_.Mutable(index)->assign(value);
+}
+inline void PGRequest_RankInfo::set_topscore(int index, const char* value) {
+  topscore_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:protobufUtils.PGRequest.RankInfo.topScore)
+}
+inline void PGRequest_RankInfo::set_topscore(int index, const char* value, size_t size) {
+  topscore_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGRequest.RankInfo.topScore)
+}
+inline ::std::string* PGRequest_RankInfo::add_topscore() {
+  return topscore_.Add();
+}
+inline void PGRequest_RankInfo::add_topscore(const ::std::string& value) {
+  topscore_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:protobufUtils.PGRequest.RankInfo.topScore)
+}
+inline void PGRequest_RankInfo::add_topscore(const char* value) {
+  topscore_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:protobufUtils.PGRequest.RankInfo.topScore)
+}
+inline void PGRequest_RankInfo::add_topscore(const char* value, size_t size) {
+  topscore_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:protobufUtils.PGRequest.RankInfo.topScore)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+PGRequest_RankInfo::topscore() const {
+  // @@protoc_insertion_point(field_list:protobufUtils.PGRequest.RankInfo.topScore)
+  return topscore_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+PGRequest_RankInfo::mutable_topscore() {
+  // @@protoc_insertion_point(field_mutable_list:protobufUtils.PGRequest.RankInfo.topScore)
+  return &topscore_;
 }
 
 // -------------------------------------------------------------------

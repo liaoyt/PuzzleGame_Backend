@@ -15,6 +15,7 @@ message PGRequest {
 	message RankInfo {
 		required string myRank = 1;
 		repeated string topUser =2 ;
+		repeated string topScore = 3;
 	}
 	optional RankInfo rankInfo = 8;
 
@@ -36,6 +37,6 @@ message PGRequest {
 // requestCode = 3：上传照片，必须填写字段3、6
 
 // 客户端申请数据
-// requestCode = 4：获取排名，返回8
+// requestCode = 4：获取排名，必须填写字段5，返回8
 // requestCode = 5：获取其他用户的照片列表，返回6、7
 // requestCode = 6：获取一张选定的照片，须填写7，返回6
