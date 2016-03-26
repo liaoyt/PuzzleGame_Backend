@@ -126,23 +126,18 @@ public final class ProtobufUtils {
         getPicturesBytes(int index);
 
     /**
-     * <code>repeated string picturesID = 7;</code>
+     * <code>optional string pictureDate = 7;</code>
      */
-    com.google.protobuf.ProtocolStringList
-        getPicturesIDList();
+    boolean hasPictureDate();
     /**
-     * <code>repeated string picturesID = 7;</code>
+     * <code>optional string pictureDate = 7;</code>
      */
-    int getPicturesIDCount();
+    java.lang.String getPictureDate();
     /**
-     * <code>repeated string picturesID = 7;</code>
-     */
-    java.lang.String getPicturesID(int index);
-    /**
-     * <code>repeated string picturesID = 7;</code>
+     * <code>optional string pictureDate = 7;</code>
      */
     com.google.protobuf.ByteString
-        getPicturesIDBytes(int index);
+        getPictureDateBytes();
 
     /**
      * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
@@ -264,16 +259,13 @@ public final class ProtobufUtils {
             }
             case 58: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                picturesID_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              picturesID_.add(bs);
+              bitField0_ |= 0x00000020;
+              pictureDate_ = bs;
               break;
             }
             case 66: {
               protobufUtils.ProtobufUtils.PGRequest.RankInfo.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
                 subBuilder = rankInfo_.toBuilder();
               }
               rankInfo_ = input.readMessage(protobufUtils.ProtobufUtils.PGRequest.RankInfo.PARSER, extensionRegistry);
@@ -281,12 +273,12 @@ public final class ProtobufUtils {
                 subBuilder.mergeFrom(rankInfo_);
                 rankInfo_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000020;
+              bitField0_ |= 0x00000040;
               break;
             }
             case 74: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000040;
+              bitField0_ |= 0x00000080;
               nickname_ = bs;
               break;
             }
@@ -300,9 +292,6 @@ public final class ProtobufUtils {
       } finally {
         if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           pictures_ = pictures_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          picturesID_ = picturesID_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1449,33 +1438,46 @@ public final class ProtobufUtils {
       return pictures_.getByteString(index);
     }
 
-    public static final int PICTURESID_FIELD_NUMBER = 7;
-    private com.google.protobuf.LazyStringList picturesID_;
+    public static final int PICTUREDATE_FIELD_NUMBER = 7;
+    private java.lang.Object pictureDate_;
     /**
-     * <code>repeated string picturesID = 7;</code>
+     * <code>optional string pictureDate = 7;</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getPicturesIDList() {
-      return picturesID_;
+    public boolean hasPictureDate() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>repeated string picturesID = 7;</code>
+     * <code>optional string pictureDate = 7;</code>
      */
-    public int getPicturesIDCount() {
-      return picturesID_.size();
+    public java.lang.String getPictureDate() {
+      java.lang.Object ref = pictureDate_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          pictureDate_ = s;
+        }
+        return s;
+      }
     }
     /**
-     * <code>repeated string picturesID = 7;</code>
-     */
-    public java.lang.String getPicturesID(int index) {
-      return picturesID_.get(index);
-    }
-    /**
-     * <code>repeated string picturesID = 7;</code>
+     * <code>optional string pictureDate = 7;</code>
      */
     public com.google.protobuf.ByteString
-        getPicturesIDBytes(int index) {
-      return picturesID_.getByteString(index);
+        getPictureDateBytes() {
+      java.lang.Object ref = pictureDate_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        pictureDate_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     public static final int RANKINFO_FIELD_NUMBER = 8;
@@ -1484,7 +1486,7 @@ public final class ProtobufUtils {
      * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
      */
     public boolean hasRankInfo() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
      * <code>optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;</code>
@@ -1505,7 +1507,7 @@ public final class ProtobufUtils {
      * <code>optional string nickname = 9;</code>
      */
     public boolean hasNickname() {
-      return ((bitField0_ & 0x00000040) == 0x00000040);
+      return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
      * <code>optional string nickname = 9;</code>
@@ -1548,7 +1550,7 @@ public final class ProtobufUtils {
       password_ = "";
       score_ = "";
       pictures_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      picturesID_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      pictureDate_ = "";
       rankInfo_ = protobufUtils.ProtobufUtils.PGRequest.RankInfo.getDefaultInstance();
       nickname_ = "";
     }
@@ -1593,13 +1595,13 @@ public final class ProtobufUtils {
       for (int i = 0; i < pictures_.size(); i++) {
         output.writeBytes(6, pictures_.getByteString(i));
       }
-      for (int i = 0; i < picturesID_.size(); i++) {
-        output.writeBytes(7, picturesID_.getByteString(i));
-      }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeMessage(8, rankInfo_);
+        output.writeBytes(7, getPictureDateBytes());
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(8, rankInfo_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeBytes(9, getNicknameBytes());
       }
       getUnknownFields().writeTo(output);
@@ -1640,20 +1642,15 @@ public final class ProtobufUtils {
         size += dataSize;
         size += 1 * getPicturesList().size();
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < picturesID_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeBytesSizeNoTag(picturesID_.getByteString(i));
-        }
-        size += dataSize;
-        size += 1 * getPicturesIDList().size();
-      }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getPictureDateBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, rankInfo_);
       }
-      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, getNicknameBytes());
       }
@@ -1787,7 +1784,7 @@ public final class ProtobufUtils {
         bitField0_ = (bitField0_ & ~0x00000010);
         pictures_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000020);
-        picturesID_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        pictureDate_ = "";
         bitField0_ = (bitField0_ & ~0x00000040);
         if (rankInfoBuilder_ == null) {
           rankInfo_ = protobufUtils.ProtobufUtils.PGRequest.RankInfo.getDefaultInstance();
@@ -1850,13 +1847,12 @@ public final class ProtobufUtils {
           bitField0_ = (bitField0_ & ~0x00000020);
         }
         result.pictures_ = pictures_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          picturesID_ = picturesID_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000040);
-        }
-        result.picturesID_ = picturesID_;
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000020;
+        }
+        result.pictureDate_ = pictureDate_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000040;
         }
         if (rankInfoBuilder_ == null) {
           result.rankInfo_ = rankInfo_;
@@ -1864,7 +1860,7 @@ public final class ProtobufUtils {
           result.rankInfo_ = rankInfoBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
-          to_bitField0_ |= 0x00000040;
+          to_bitField0_ |= 0x00000080;
         }
         result.nickname_ = nickname_;
         result.bitField0_ = to_bitField0_;
@@ -1918,14 +1914,9 @@ public final class ProtobufUtils {
           }
           onChanged();
         }
-        if (!other.picturesID_.isEmpty()) {
-          if (picturesID_.isEmpty()) {
-            picturesID_ = other.picturesID_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensurePicturesIDIsMutable();
-            picturesID_.addAll(other.picturesID_);
-          }
+        if (other.hasPictureDate()) {
+          bitField0_ |= 0x00000040;
+          pictureDate_ = other.pictureDate_;
           onChanged();
         }
         if (other.hasRankInfo()) {
@@ -2494,95 +2485,78 @@ public final class ProtobufUtils {
         return this;
       }
 
-      private com.google.protobuf.LazyStringList picturesID_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensurePicturesIDIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          picturesID_ = new com.google.protobuf.LazyStringArrayList(picturesID_);
-          bitField0_ |= 0x00000040;
-         }
-      }
+      private java.lang.Object pictureDate_ = "";
       /**
-       * <code>repeated string picturesID = 7;</code>
+       * <code>optional string pictureDate = 7;</code>
        */
-      public com.google.protobuf.ProtocolStringList
-          getPicturesIDList() {
-        return picturesID_.getUnmodifiableView();
+      public boolean hasPictureDate() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>repeated string picturesID = 7;</code>
+       * <code>optional string pictureDate = 7;</code>
        */
-      public int getPicturesIDCount() {
-        return picturesID_.size();
+      public java.lang.String getPictureDate() {
+        java.lang.Object ref = pictureDate_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            pictureDate_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>repeated string picturesID = 7;</code>
-       */
-      public java.lang.String getPicturesID(int index) {
-        return picturesID_.get(index);
-      }
-      /**
-       * <code>repeated string picturesID = 7;</code>
+       * <code>optional string pictureDate = 7;</code>
        */
       public com.google.protobuf.ByteString
-          getPicturesIDBytes(int index) {
-        return picturesID_.getByteString(index);
+          getPictureDateBytes() {
+        java.lang.Object ref = pictureDate_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          pictureDate_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
       /**
-       * <code>repeated string picturesID = 7;</code>
+       * <code>optional string pictureDate = 7;</code>
        */
-      public Builder setPicturesID(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensurePicturesIDIsMutable();
-        picturesID_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string picturesID = 7;</code>
-       */
-      public Builder addPicturesID(
+      public Builder setPictureDate(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensurePicturesIDIsMutable();
-        picturesID_.add(value);
+  bitField0_ |= 0x00000040;
+        pictureDate_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string picturesID = 7;</code>
+       * <code>optional string pictureDate = 7;</code>
        */
-      public Builder addAllPicturesID(
-          java.lang.Iterable<java.lang.String> values) {
-        ensurePicturesIDIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, picturesID_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string picturesID = 7;</code>
-       */
-      public Builder clearPicturesID() {
-        picturesID_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      public Builder clearPictureDate() {
         bitField0_ = (bitField0_ & ~0x00000040);
+        pictureDate_ = getDefaultInstance().getPictureDate();
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string picturesID = 7;</code>
+       * <code>optional string pictureDate = 7;</code>
        */
-      public Builder addPicturesIDBytes(
+      public Builder setPictureDateBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensurePicturesIDIsMutable();
-        picturesID_.add(value);
+  bitField0_ |= 0x00000040;
+        pictureDate_ = value;
         onChanged();
         return this;
       }
@@ -2790,6 +2764,909 @@ public final class ProtobufUtils {
     // @@protoc_insertion_point(class_scope:protobufUtils.PGRequest)
   }
 
+  public interface PGImageOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protobufUtils.PGImage)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string opt = 4;</code>
+     */
+    boolean hasOpt();
+    /**
+     * <code>required string opt = 4;</code>
+     */
+    java.lang.String getOpt();
+    /**
+     * <code>required string opt = 4;</code>
+     */
+    com.google.protobuf.ByteString
+        getOptBytes();
+
+    /**
+     * <code>required string username = 1;</code>
+     */
+    boolean hasUsername();
+    /**
+     * <code>required string username = 1;</code>
+     */
+    java.lang.String getUsername();
+    /**
+     * <code>required string username = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getUsernameBytes();
+
+    /**
+     * <code>required string date = 2;</code>
+     */
+    boolean hasDate();
+    /**
+     * <code>required string date = 2;</code>
+     */
+    java.lang.String getDate();
+    /**
+     * <code>required string date = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDateBytes();
+
+    /**
+     * <code>required bytes image = 3;</code>
+     */
+    boolean hasImage();
+    /**
+     * <code>required bytes image = 3;</code>
+     */
+    com.google.protobuf.ByteString getImage();
+  }
+  /**
+   * Protobuf type {@code protobufUtils.PGImage}
+   */
+  public static final class PGImage extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:protobufUtils.PGImage)
+      PGImageOrBuilder {
+    // Use PGImage.newBuilder() to construct.
+    private PGImage(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private PGImage(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final PGImage defaultInstance;
+    public static PGImage getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public PGImage getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PGImage(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              username_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
+              date_ = bs;
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000008;
+              image_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              opt_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return protobufUtils.ProtobufUtils.internal_static_protobufUtils_PGImage_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return protobufUtils.ProtobufUtils.internal_static_protobufUtils_PGImage_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              protobufUtils.ProtobufUtils.PGImage.class, protobufUtils.ProtobufUtils.PGImage.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<PGImage> PARSER =
+        new com.google.protobuf.AbstractParser<PGImage>() {
+      public PGImage parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new PGImage(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<PGImage> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int OPT_FIELD_NUMBER = 4;
+    private java.lang.Object opt_;
+    /**
+     * <code>required string opt = 4;</code>
+     */
+    public boolean hasOpt() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string opt = 4;</code>
+     */
+    public java.lang.String getOpt() {
+      java.lang.Object ref = opt_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          opt_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string opt = 4;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOptBytes() {
+      java.lang.Object ref = opt_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        opt_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int USERNAME_FIELD_NUMBER = 1;
+    private java.lang.Object username_;
+    /**
+     * <code>required string username = 1;</code>
+     */
+    public boolean hasUsername() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required string username = 1;</code>
+     */
+    public java.lang.String getUsername() {
+      java.lang.Object ref = username_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          username_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string username = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUsernameBytes() {
+      java.lang.Object ref = username_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        username_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DATE_FIELD_NUMBER = 2;
+    private java.lang.Object date_;
+    /**
+     * <code>required string date = 2;</code>
+     */
+    public boolean hasDate() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string date = 2;</code>
+     */
+    public java.lang.String getDate() {
+      java.lang.Object ref = date_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          date_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string date = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDateBytes() {
+      java.lang.Object ref = date_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        date_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IMAGE_FIELD_NUMBER = 3;
+    private com.google.protobuf.ByteString image_;
+    /**
+     * <code>required bytes image = 3;</code>
+     */
+    public boolean hasImage() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required bytes image = 3;</code>
+     */
+    public com.google.protobuf.ByteString getImage() {
+      return image_;
+    }
+
+    private void initFields() {
+      opt_ = "";
+      username_ = "";
+      date_ = "";
+      image_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasOpt()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasUsername()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasDate()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasImage()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(1, getUsernameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(2, getDateBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(3, image_);
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(4, getOptBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUsernameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getDateBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, image_);
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getOptBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static protobufUtils.ProtobufUtils.PGImage parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(protobufUtils.ProtobufUtils.PGImage prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code protobufUtils.PGImage}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:protobufUtils.PGImage)
+        protobufUtils.ProtobufUtils.PGImageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return protobufUtils.ProtobufUtils.internal_static_protobufUtils_PGImage_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return protobufUtils.ProtobufUtils.internal_static_protobufUtils_PGImage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                protobufUtils.ProtobufUtils.PGImage.class, protobufUtils.ProtobufUtils.PGImage.Builder.class);
+      }
+
+      // Construct using protobufUtils.ProtobufUtils.PGImage.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        opt_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        username_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        date_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        image_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return protobufUtils.ProtobufUtils.internal_static_protobufUtils_PGImage_descriptor;
+      }
+
+      public protobufUtils.ProtobufUtils.PGImage getDefaultInstanceForType() {
+        return protobufUtils.ProtobufUtils.PGImage.getDefaultInstance();
+      }
+
+      public protobufUtils.ProtobufUtils.PGImage build() {
+        protobufUtils.ProtobufUtils.PGImage result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public protobufUtils.ProtobufUtils.PGImage buildPartial() {
+        protobufUtils.ProtobufUtils.PGImage result = new protobufUtils.ProtobufUtils.PGImage(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.opt_ = opt_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.username_ = username_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.date_ = date_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.image_ = image_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof protobufUtils.ProtobufUtils.PGImage) {
+          return mergeFrom((protobufUtils.ProtobufUtils.PGImage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(protobufUtils.ProtobufUtils.PGImage other) {
+        if (other == protobufUtils.ProtobufUtils.PGImage.getDefaultInstance()) return this;
+        if (other.hasOpt()) {
+          bitField0_ |= 0x00000001;
+          opt_ = other.opt_;
+          onChanged();
+        }
+        if (other.hasUsername()) {
+          bitField0_ |= 0x00000002;
+          username_ = other.username_;
+          onChanged();
+        }
+        if (other.hasDate()) {
+          bitField0_ |= 0x00000004;
+          date_ = other.date_;
+          onChanged();
+        }
+        if (other.hasImage()) {
+          setImage(other.getImage());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasOpt()) {
+          
+          return false;
+        }
+        if (!hasUsername()) {
+          
+          return false;
+        }
+        if (!hasDate()) {
+          
+          return false;
+        }
+        if (!hasImage()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        protobufUtils.ProtobufUtils.PGImage parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (protobufUtils.ProtobufUtils.PGImage) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object opt_ = "";
+      /**
+       * <code>required string opt = 4;</code>
+       */
+      public boolean hasOpt() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string opt = 4;</code>
+       */
+      public java.lang.String getOpt() {
+        java.lang.Object ref = opt_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            opt_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string opt = 4;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOptBytes() {
+        java.lang.Object ref = opt_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          opt_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string opt = 4;</code>
+       */
+      public Builder setOpt(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        opt_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string opt = 4;</code>
+       */
+      public Builder clearOpt() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        opt_ = getDefaultInstance().getOpt();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string opt = 4;</code>
+       */
+      public Builder setOptBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        opt_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object username_ = "";
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public boolean hasUsername() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public java.lang.String getUsername() {
+        java.lang.Object ref = username_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            username_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUsernameBytes() {
+        java.lang.Object ref = username_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          username_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public Builder setUsername(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        username_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public Builder clearUsername() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        username_ = getDefaultInstance().getUsername();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string username = 1;</code>
+       */
+      public Builder setUsernameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        username_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object date_ = "";
+      /**
+       * <code>required string date = 2;</code>
+       */
+      public boolean hasDate() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string date = 2;</code>
+       */
+      public java.lang.String getDate() {
+        java.lang.Object ref = date_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            date_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string date = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDateBytes() {
+        java.lang.Object ref = date_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          date_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string date = 2;</code>
+       */
+      public Builder setDate(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        date_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string date = 2;</code>
+       */
+      public Builder clearDate() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        date_ = getDefaultInstance().getDate();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string date = 2;</code>
+       */
+      public Builder setDateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        date_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString image_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>required bytes image = 3;</code>
+       */
+      public boolean hasImage() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required bytes image = 3;</code>
+       */
+      public com.google.protobuf.ByteString getImage() {
+        return image_;
+      }
+      /**
+       * <code>required bytes image = 3;</code>
+       */
+      public Builder setImage(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        image_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required bytes image = 3;</code>
+       */
+      public Builder clearImage() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        image_ = getDefaultInstance().getImage();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:protobufUtils.PGImage)
+    }
+
+    static {
+      defaultInstance = new PGImage(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:protobufUtils.PGImage)
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_protobufUtils_PGRequest_descriptor;
   private static
@@ -2800,6 +3677,11 @@ public final class ProtobufUtils {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_protobufUtils_PGRequest_RankInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protobufUtils_PGImage_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_protobufUtils_PGImage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2809,14 +3691,16 @@ public final class ProtobufUtils {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023protobufUtils.proto\022\rprotobufUtils\"\213\002\n" +
+      "\n\023protobufUtils.proto\022\rprotobufUtils\"\214\002\n" +
       "\tPGRequest\022\014\n\004Code\030\001 \002(\t\022\021\n\terrorInfo\030\002 " +
       "\001(\t\022\020\n\010username\030\003 \001(\t\022\020\n\010password\030\004 \001(\t\022" +
-      "\r\n\005score\030\005 \001(\t\022\020\n\010pictures\030\006 \003(\t\022\022\n\npict" +
-      "uresID\030\007 \003(\t\0223\n\010rankInfo\030\010 \001(\0132!.protobu" +
-      "fUtils.PGRequest.RankInfo\022\020\n\010nickname\030\t " +
-      "\001(\t\032=\n\010RankInfo\022\016\n\006myRank\030\001 \002(\t\022\017\n\007topUs" +
-      "er\030\002 \003(\t\022\020\n\010topScore\030\003 \003(\t"
+      "\r\n\005score\030\005 \001(\t\022\020\n\010pictures\030\006 \003(\t\022\023\n\013pict" +
+      "ureDate\030\007 \001(\t\0223\n\010rankInfo\030\010 \001(\0132!.protob" +
+      "ufUtils.PGRequest.RankInfo\022\020\n\010nickname\030\t" +
+      " \001(\t\032=\n\010RankInfo\022\016\n\006myRank\030\001 \002(\t\022\017\n\007topU" +
+      "ser\030\002 \003(\t\022\020\n\010topScore\030\003 \003(\t\"E\n\007PGImage\022\013" +
+      "\n\003opt\030\004 \002(\t\022\020\n\010username\030\001 \002(\t\022\014\n\004date\030\002 " +
+      "\002(\t\022\r\n\005image\030\003 \002(\014"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2835,13 +3719,19 @@ public final class ProtobufUtils {
     internal_static_protobufUtils_PGRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobufUtils_PGRequest_descriptor,
-        new java.lang.String[] { "Code", "ErrorInfo", "Username", "Password", "Score", "Pictures", "PicturesID", "RankInfo", "Nickname", });
+        new java.lang.String[] { "Code", "ErrorInfo", "Username", "Password", "Score", "Pictures", "PictureDate", "RankInfo", "Nickname", });
     internal_static_protobufUtils_PGRequest_RankInfo_descriptor =
       internal_static_protobufUtils_PGRequest_descriptor.getNestedTypes().get(0);
     internal_static_protobufUtils_PGRequest_RankInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_protobufUtils_PGRequest_RankInfo_descriptor,
         new java.lang.String[] { "MyRank", "TopUser", "TopScore", });
+    internal_static_protobufUtils_PGImage_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_protobufUtils_PGImage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_protobufUtils_PGImage_descriptor,
+        new java.lang.String[] { "Opt", "Username", "Date", "Image", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

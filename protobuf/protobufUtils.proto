@@ -10,7 +10,7 @@ message PGRequest {
 	optional string score = 5;
 	
 	repeated string pictures= 6;
-	repeated string picturesID = 7;
+	optional string pictureDate = 7;
 
 	message RankInfo {
 		required string myRank = 1;
@@ -20,6 +20,13 @@ message PGRequest {
 	optional RankInfo rankInfo = 8;
 
 	optional string nickname = 9;
+}
+
+message PGImage {
+	required string opt = 4;
+	required string username = 1;
+	required string date = 2;
+	required bytes image = 3;
 }
 
 // required的字段在任何情况下都必须填写

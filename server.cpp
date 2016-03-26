@@ -14,9 +14,19 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <fstream>
+#include <sys/ipc.h>
+#include <sys/msg.h>
 
 #define MAXBUF 1024
 #define MAXEPOLLSIZE 10000
+
+#define MSGKEY 1024
+struct msgstru
+{
+	long msgtype;
+	char msgtext[2048];
+};
+int key;
 
 using namespace std;
 
@@ -24,10 +34,10 @@ extern void connectMysql();
 extern void signup(const string username, const string password, const string nickname);
 extern void login(const string username, const string password);
 extern void postScore(const string username, const string score);
-extern void postPicture(const string username, const string picture);
+extern void postPicture(const string username, const string pictureDate);
 extern void getRank(const string score);
 extern void getPicList();
-extern void getExactPic(const string pictureID);
+extern void getExactPic(const string pictureName);
 extern void closeConnect();
 extern char* msg;
 
@@ -68,8 +78,8 @@ void handle_massage(protobufUtils::PGRequest &request)
 		else
 			MissingField();
 	}  else if (strcmp(request.code().c_str(), "3") == 0) {		// 上传照片
-		if (request.has_username() && request.pictures_size() != 0)
-			postPicture(request.username(), request.pictures(0));
+		if (request.has_username() && request.has_picturedate())
+			postPicture(request.username(), request.picturedate());
 		else
 			MissingField();
 	} else if (strcmp(request.code().c_str(), "4") == 0) { 		// 排名
@@ -80,8 +90,8 @@ void handle_massage(protobufUtils::PGRequest &request)
 	} else if (strcmp(request.code().c_str(), "5") == 0) {		// 自定义照片列表
 		getPicList();
 	} else if (strcmp(request.code().c_str(), "6") == 0) {		// 选取特定照片
-		if (request.picturesid_size() != 0)
-			getExactPic(request.picturesid(0));
+		if (request.pictures_size() != 0)
+			getExactPic(request.pictures(0));
 		else
 			MissingField();
 	} else {							// 请求码错误
@@ -106,7 +116,6 @@ int handle_socket(int new_fd) {
 		       new_fd, buf, len);
 		protobufUtils::PGRequest request;
 		request.ParseFromArray(buf, len);
-		// request.ParseFromString(string(buf));
 		request.CheckInitialized();
 
 		handle_massage(request);
@@ -124,7 +133,135 @@ int handle_socket(int new_fd) {
 	return len;
 }
 
-int main() {
+void handle_image(int new_fd) {
+	// setnonblocking(new_fd);
+	char picbuf[102400];
+	string picture = "";
+	int len = 0;
+	bool firstread = true;
+	while (true) {
+		len = read(new_fd, picbuf, 102400);
+		printf("%d\n", len);
+		if (len > 0) {
+			picture += string(picbuf, len);
+			if (firstread) {
+				protobufUtils::PGImage test;
+				test.ParseFromString(picture);
+				if(test.opt() == "get"){
+					break;
+				} else {
+					firstread = false;
+					continue;
+				}
+			}
+		} else {
+			break;
+		}
+	}
+
+	printf("%d接收消息成功:,共%d个字节的数据\n",
+	       new_fd, (int)picture.length());
+
+	protobufUtils::PGImage image;
+	image.ParseFromString(picture);
+	image.CheckInitialized();
+
+	if (image.opt() == "post") {
+		string filename(image.username() + image.date() + ".bmp");
+		fstream ifs(filename.c_str(), ios::binary | ios::out);
+		ifs.write(image.image().data(), image.image().length());
+		ifs.close();
+	} else if (image.opt() == "get") {
+		string picNam(image.username() + image.date() + ".bmp");
+		fstream ifs(picNam.c_str(), ios::binary | ios::in);
+		char picbuf[102400];
+		picture.clear();
+		while (!ifs.eof()) {
+			ifs.read(picbuf, 102400);
+			int count = ifs.gcount();
+			picture += string(picbuf, count);
+		}
+
+		protobufUtils::PGImage image;
+		image.set_opt("post");
+		image.set_username(picNam);
+		image.set_date(picNam);
+		image.set_image(picture.data(), picture.length());
+		string sendmsg;
+		image.SerializeToString(&sendmsg);
+		write(new_fd, sendmsg.data(), sendmsg.length());
+	}
+
+	close(new_fd);
+	return;
+}
+
+int imageProc() {
+
+	int listener, new_fd;
+	socklen_t len;
+	struct sockaddr_in my_addr, their_addr;
+	unsigned int myport, lisnum;
+	struct rlimit rt;
+	myport = 9734 + 3;
+	lisnum = 1;
+	rt.rlim_max = rt.rlim_cur = MAXEPOLLSIZE;
+
+	/* 设置每个进程允许打开的最大文件数 */
+	if (setrlimit(RLIMIT_NOFILE, &rt) == -1) {
+		perror("setrlimit");
+		exit(1);
+	}
+	else {
+		printf("设置系统资源参数成功!\n");
+	}
+
+	/* 开启 socket 监听 */
+	if ((listener = socket(PF_INET, SOCK_STREAM, 0)) == -1) {
+		perror("socket");
+		exit(1);
+	}
+	else {
+		printf("socket 创建成功!\n");
+	}
+	setnonblocking(listener);
+	bzero(&my_addr, sizeof(my_addr));
+	my_addr.sin_family = PF_INET;
+	my_addr.sin_port = htons(myport);
+	my_addr.sin_addr.s_addr = INADDR_ANY;
+	if (bind(listener, (struct sockaddr *) &my_addr, sizeof(struct sockaddr)) == -1) {
+		perror("bind");
+		exit(1);
+	}
+	else {
+		printf("IP 地址和端口绑定成功\n");
+	}
+	if (listen(listener, lisnum) == -1) {
+		perror("listen");
+		exit(1);
+	}
+	else {
+		printf("开启图片服务成功!\n");
+	}
+
+	while (true) {
+		new_fd = accept(listener, (struct sockaddr *) &their_addr, &len);
+		if (new_fd > 0) {
+			if (fork() > 0) {
+				close(new_fd);
+			} else {
+				handle_image(new_fd);
+				return 0;
+			}
+		}
+	}
+
+	close(listener);
+	return 0;
+}
+
+int messageProc() {
+
 	int listener, new_fd, kdpfd, nfds, n, ret, curfds;
 	socklen_t len;
 	struct sockaddr_in my_addr, their_addr;
@@ -170,7 +307,7 @@ int main() {
 		exit(1);
 	}
 	else {
-		printf("开启服务成功!\n");
+		printf("开启消息服务成功!\n");
 	}
 
 	/* 创建 epoll 句柄,把监听 socket 加入到 epoll 集合里 */
@@ -228,5 +365,27 @@ int main() {
 	printf("%s\n", "exit");
 	closeConnect();
 	close(listener);
+	return 0;
+}
+
+int main() {
+
+	pid_t pid;
+	// 分叉进程
+	pid = fork();
+
+	// 判断是否执行成功
+	if (-1 == pid)
+	{
+		printf("进程创建失败\n");
+	} else if (pid == 0)
+	{
+		// 子进程中执行此代码
+		imageProc();
+	} else {
+		// 父进程执行代码
+		messageProc();
+	}
+
 	return 0;
 }

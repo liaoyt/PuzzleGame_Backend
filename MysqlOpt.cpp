@@ -1,6 +1,7 @@
 #include <mysql/mysql.h>
 #include <string>
 #include <stdio.h>
+#include <fstream>
 #include "protobuf/protobufUtils.pb.h"
 
 using namespace std;
@@ -89,23 +90,30 @@ void postScore(const string username, const string score)
 		PGRt.set_errorinfo("succed");
 	} else {
 		PGRt.set_code("304");
-		PGRt.set_errorinfo("Update error!");
+		PGRt.set_errorinfo("Score Update error!");
 	}
 
 	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
 }
 
-void postPicture(const string username, const string picture)
+void postPicture(const string username, const string pictureDate)
 {
 	protobufUtils::PGRequest PGRt;
 
 	printf("%s\n", username.c_str());
-	printf("%s\n", picture.c_str());
+	printf("%s\n", pictureDate.c_str());
 
+	string sql = "insert into Pic(username, pictureDate) values('"
+	             + username + "', '" + pictureDate + "');";
 
-	PGRt.set_code("666");
-	PGRt.set_errorinfo("succed");
+	if (mysql_query(&mysql, sql.c_str()) == 0) {
+		PGRt.set_code("666");
+		PGRt.set_errorinfo("succed");
+	} else {
+		PGRt.set_code("305");
+		PGRt.set_errorinfo("Post picture error!");
+	}
 
 	PGRt.CheckInitialized();
 	PGRt.SerializeToArray(msg, 1024);
@@ -127,12 +135,11 @@ void getRank(const string score)
 
 	protobufUtils::PGRequest_RankInfo * rankinfo = PGRt.mutable_rankinfo();
 
-	if(rowcnt >= 15) rowcnt = 15;
-	while(rowcnt --) {
-	    row = mysql_fetch_row(result);
-	    printf("%s\t%s\n", row[0], row[1]);
-	    rankinfo->add_topuser(row[0]);
-	    rankinfo->add_topscore(row[1]);
+	while (rowcnt --) {
+		row = mysql_fetch_row(result);
+		printf("%s\t%s\n", row[0], row[1]);
+		rankinfo->add_topuser(row[0]);
+		rankinfo->add_topscore(row[1]);
 	}
 
 	sql = "select count(*) from User where score >= " + score;
@@ -152,6 +159,19 @@ void getPicList()
 {
 	protobufUtils::PGRequest PGRt;
 
+	string sql = "select * from Pic order by data desc limit 8";
+	MYSQL_RES *result = NULL;
+	mysql_query(&mysql, sql.c_str());
+	result = mysql_store_result(&mysql);
+	MYSQL_ROW row = NULL;
+	int rowcnt = mysql_num_rows(result);
+	printf("%d\n", rowcnt);
+
+	while (rowcnt --) {
+		row = mysql_fetch_row(result);
+		printf("%s\t%s\n", row[1], row[2]);
+		PGRt.add_pictures(string(row[1]) + string(row[2]));
+	}
 
 	PGRt.set_code("666");
 	PGRt.set_errorinfo("succed");
@@ -160,10 +180,13 @@ void getPicList()
 	PGRt.SerializeToArray(msg, 1024);
 }
 
-void getExactPic(const string pictureID)
+void getExactPic(const string pictureName)
 {
-	printf("%s\n", pictureID.c_str());
+	printf("%s\n", pictureName.c_str());
 	protobufUtils::PGRequest PGRt;
+
+	
+	
 
 	PGRt.set_code("666");
 	PGRt.set_errorinfo("succed");

@@ -35,6 +35,7 @@ void protobuf_ShutdownFile_protobufUtils_2eproto();
 
 class PGRequest;
 class PGRequest_RankInfo;
+class PGImage;
 
 // ===================================================================
 
@@ -287,21 +288,17 @@ class PGRequest : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& pictures() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_pictures();
 
-  // repeated string picturesID = 7;
-  inline int picturesid_size() const;
-  inline void clear_picturesid();
-  static const int kPicturesIDFieldNumber = 7;
-  inline const ::std::string& picturesid(int index) const;
-  inline ::std::string* mutable_picturesid(int index);
-  inline void set_picturesid(int index, const ::std::string& value);
-  inline void set_picturesid(int index, const char* value);
-  inline void set_picturesid(int index, const char* value, size_t size);
-  inline ::std::string* add_picturesid();
-  inline void add_picturesid(const ::std::string& value);
-  inline void add_picturesid(const char* value);
-  inline void add_picturesid(const char* value, size_t size);
-  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& picturesid() const;
-  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_picturesid();
+  // optional string pictureDate = 7;
+  inline bool has_picturedate() const;
+  inline void clear_picturedate();
+  static const int kPictureDateFieldNumber = 7;
+  inline const ::std::string& picturedate() const;
+  inline void set_picturedate(const ::std::string& value);
+  inline void set_picturedate(const char* value);
+  inline void set_picturedate(const char* value, size_t size);
+  inline ::std::string* mutable_picturedate();
+  inline ::std::string* release_picturedate();
+  inline void set_allocated_picturedate(::std::string* picturedate);
 
   // optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
   inline bool has_rankinfo() const;
@@ -336,6 +333,8 @@ class PGRequest : public ::google::protobuf::Message {
   inline void clear_has_password();
   inline void set_has_score();
   inline void clear_has_score();
+  inline void set_has_picturedate();
+  inline void clear_has_picturedate();
   inline void set_has_rankinfo();
   inline void clear_has_rankinfo();
   inline void set_has_nickname();
@@ -351,7 +350,7 @@ class PGRequest : public ::google::protobuf::Message {
   ::std::string* password_;
   ::std::string* score_;
   ::google::protobuf::RepeatedPtrField< ::std::string> pictures_;
-  ::google::protobuf::RepeatedPtrField< ::std::string> picturesid_;
+  ::std::string* picturedate_;
   ::protobufUtils::PGRequest_RankInfo* rankinfo_;
   ::std::string* nickname_;
   friend void  protobuf_AddDesc_protobufUtils_2eproto();
@@ -360,6 +359,135 @@ class PGRequest : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static PGRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class PGImage : public ::google::protobuf::Message {
+ public:
+  PGImage();
+  virtual ~PGImage();
+
+  PGImage(const PGImage& from);
+
+  inline PGImage& operator=(const PGImage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const PGImage& default_instance();
+
+  void Swap(PGImage* other);
+
+  // implements Message ----------------------------------------------
+
+  PGImage* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const PGImage& from);
+  void MergeFrom(const PGImage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string opt = 4;
+  inline bool has_opt() const;
+  inline void clear_opt();
+  static const int kOptFieldNumber = 4;
+  inline const ::std::string& opt() const;
+  inline void set_opt(const ::std::string& value);
+  inline void set_opt(const char* value);
+  inline void set_opt(const char* value, size_t size);
+  inline ::std::string* mutable_opt();
+  inline ::std::string* release_opt();
+  inline void set_allocated_opt(::std::string* opt);
+
+  // required string username = 1;
+  inline bool has_username() const;
+  inline void clear_username();
+  static const int kUsernameFieldNumber = 1;
+  inline const ::std::string& username() const;
+  inline void set_username(const ::std::string& value);
+  inline void set_username(const char* value);
+  inline void set_username(const char* value, size_t size);
+  inline ::std::string* mutable_username();
+  inline ::std::string* release_username();
+  inline void set_allocated_username(::std::string* username);
+
+  // required string date = 2;
+  inline bool has_date() const;
+  inline void clear_date();
+  static const int kDateFieldNumber = 2;
+  inline const ::std::string& date() const;
+  inline void set_date(const ::std::string& value);
+  inline void set_date(const char* value);
+  inline void set_date(const char* value, size_t size);
+  inline ::std::string* mutable_date();
+  inline ::std::string* release_date();
+  inline void set_allocated_date(::std::string* date);
+
+  // required bytes image = 3;
+  inline bool has_image() const;
+  inline void clear_image();
+  static const int kImageFieldNumber = 3;
+  inline const ::std::string& image() const;
+  inline void set_image(const ::std::string& value);
+  inline void set_image(const char* value);
+  inline void set_image(const void* value, size_t size);
+  inline ::std::string* mutable_image();
+  inline ::std::string* release_image();
+  inline void set_allocated_image(::std::string* image);
+
+  // @@protoc_insertion_point(class_scope:protobufUtils.PGImage)
+ private:
+  inline void set_has_opt();
+  inline void clear_has_opt();
+  inline void set_has_username();
+  inline void clear_has_username();
+  inline void set_has_date();
+  inline void clear_has_date();
+  inline void set_has_image();
+  inline void clear_has_image();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* opt_;
+  ::std::string* username_;
+  ::std::string* date_;
+  ::std::string* image_;
+  friend void  protobuf_AddDesc_protobufUtils_2eproto();
+  friend void protobuf_AssignDesc_protobufUtils_2eproto();
+  friend void protobuf_ShutdownFile_protobufUtils_2eproto();
+
+  void InitAsDefaultInstance();
+  static PGImage* default_instance_;
 };
 // ===================================================================
 
@@ -990,58 +1118,80 @@ PGRequest::mutable_pictures() {
   return &pictures_;
 }
 
-// repeated string picturesID = 7;
-inline int PGRequest::picturesid_size() const {
-  return picturesid_.size();
+// optional string pictureDate = 7;
+inline bool PGRequest::has_picturedate() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void PGRequest::clear_picturesid() {
-  picturesid_.Clear();
+inline void PGRequest::set_has_picturedate() {
+  _has_bits_[0] |= 0x00000040u;
 }
-inline const ::std::string& PGRequest::picturesid(int index) const {
-  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.picturesID)
-  return picturesid_.Get(index);
+inline void PGRequest::clear_has_picturedate() {
+  _has_bits_[0] &= ~0x00000040u;
 }
-inline ::std::string* PGRequest::mutable_picturesid(int index) {
-  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.picturesID)
-  return picturesid_.Mutable(index);
+inline void PGRequest::clear_picturedate() {
+  if (picturedate_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    picturedate_->clear();
+  }
+  clear_has_picturedate();
 }
-inline void PGRequest::set_picturesid(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.picturesID)
-  picturesid_.Mutable(index)->assign(value);
+inline const ::std::string& PGRequest::picturedate() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGRequest.pictureDate)
+  return *picturedate_;
 }
-inline void PGRequest::set_picturesid(int index, const char* value) {
-  picturesid_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:protobufUtils.PGRequest.picturesID)
+inline void PGRequest::set_picturedate(const ::std::string& value) {
+  set_has_picturedate();
+  if (picturedate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    picturedate_ = new ::std::string;
+  }
+  picturedate_->assign(value);
+  // @@protoc_insertion_point(field_set:protobufUtils.PGRequest.pictureDate)
 }
-inline void PGRequest::set_picturesid(int index, const char* value, size_t size) {
-  picturesid_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGRequest.picturesID)
+inline void PGRequest::set_picturedate(const char* value) {
+  set_has_picturedate();
+  if (picturedate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    picturedate_ = new ::std::string;
+  }
+  picturedate_->assign(value);
+  // @@protoc_insertion_point(field_set_char:protobufUtils.PGRequest.pictureDate)
 }
-inline ::std::string* PGRequest::add_picturesid() {
-  return picturesid_.Add();
+inline void PGRequest::set_picturedate(const char* value, size_t size) {
+  set_has_picturedate();
+  if (picturedate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    picturedate_ = new ::std::string;
+  }
+  picturedate_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGRequest.pictureDate)
 }
-inline void PGRequest::add_picturesid(const ::std::string& value) {
-  picturesid_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:protobufUtils.PGRequest.picturesID)
+inline ::std::string* PGRequest::mutable_picturedate() {
+  set_has_picturedate();
+  if (picturedate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    picturedate_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGRequest.pictureDate)
+  return picturedate_;
 }
-inline void PGRequest::add_picturesid(const char* value) {
-  picturesid_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:protobufUtils.PGRequest.picturesID)
+inline ::std::string* PGRequest::release_picturedate() {
+  clear_has_picturedate();
+  if (picturedate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = picturedate_;
+    picturedate_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
 }
-inline void PGRequest::add_picturesid(const char* value, size_t size) {
-  picturesid_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:protobufUtils.PGRequest.picturesID)
-}
-inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
-PGRequest::picturesid() const {
-  // @@protoc_insertion_point(field_list:protobufUtils.PGRequest.picturesID)
-  return picturesid_;
-}
-inline ::google::protobuf::RepeatedPtrField< ::std::string>*
-PGRequest::mutable_picturesid() {
-  // @@protoc_insertion_point(field_mutable_list:protobufUtils.PGRequest.picturesID)
-  return &picturesid_;
+inline void PGRequest::set_allocated_picturedate(::std::string* picturedate) {
+  if (picturedate_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete picturedate_;
+  }
+  if (picturedate) {
+    set_has_picturedate();
+    picturedate_ = picturedate;
+  } else {
+    clear_has_picturedate();
+    picturedate_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.pictureDate)
 }
 
 // optional .protobufUtils.PGRequest.RankInfo rankInfo = 8;
@@ -1159,6 +1309,314 @@ inline void PGRequest::set_allocated_nickname(::std::string* nickname) {
     nickname_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGRequest.nickname)
+}
+
+// -------------------------------------------------------------------
+
+// PGImage
+
+// required string opt = 4;
+inline bool PGImage::has_opt() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void PGImage::set_has_opt() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void PGImage::clear_has_opt() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void PGImage::clear_opt() {
+  if (opt_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    opt_->clear();
+  }
+  clear_has_opt();
+}
+inline const ::std::string& PGImage::opt() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGImage.opt)
+  return *opt_;
+}
+inline void PGImage::set_opt(const ::std::string& value) {
+  set_has_opt();
+  if (opt_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    opt_ = new ::std::string;
+  }
+  opt_->assign(value);
+  // @@protoc_insertion_point(field_set:protobufUtils.PGImage.opt)
+}
+inline void PGImage::set_opt(const char* value) {
+  set_has_opt();
+  if (opt_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    opt_ = new ::std::string;
+  }
+  opt_->assign(value);
+  // @@protoc_insertion_point(field_set_char:protobufUtils.PGImage.opt)
+}
+inline void PGImage::set_opt(const char* value, size_t size) {
+  set_has_opt();
+  if (opt_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    opt_ = new ::std::string;
+  }
+  opt_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGImage.opt)
+}
+inline ::std::string* PGImage::mutable_opt() {
+  set_has_opt();
+  if (opt_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    opt_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGImage.opt)
+  return opt_;
+}
+inline ::std::string* PGImage::release_opt() {
+  clear_has_opt();
+  if (opt_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = opt_;
+    opt_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void PGImage::set_allocated_opt(::std::string* opt) {
+  if (opt_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete opt_;
+  }
+  if (opt) {
+    set_has_opt();
+    opt_ = opt;
+  } else {
+    clear_has_opt();
+    opt_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGImage.opt)
+}
+
+// required string username = 1;
+inline bool PGImage::has_username() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void PGImage::set_has_username() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void PGImage::clear_has_username() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void PGImage::clear_username() {
+  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_->clear();
+  }
+  clear_has_username();
+}
+inline const ::std::string& PGImage::username() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGImage.username)
+  return *username_;
+}
+inline void PGImage::set_username(const ::std::string& value) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
+  }
+  username_->assign(value);
+  // @@protoc_insertion_point(field_set:protobufUtils.PGImage.username)
+}
+inline void PGImage::set_username(const char* value) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
+  }
+  username_->assign(value);
+  // @@protoc_insertion_point(field_set_char:protobufUtils.PGImage.username)
+}
+inline void PGImage::set_username(const char* value, size_t size) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
+  }
+  username_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGImage.username)
+}
+inline ::std::string* PGImage::mutable_username() {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGImage.username)
+  return username_;
+}
+inline ::std::string* PGImage::release_username() {
+  clear_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = username_;
+    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void PGImage::set_allocated_username(::std::string* username) {
+  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete username_;
+  }
+  if (username) {
+    set_has_username();
+    username_ = username;
+  } else {
+    clear_has_username();
+    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGImage.username)
+}
+
+// required string date = 2;
+inline bool PGImage::has_date() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void PGImage::set_has_date() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void PGImage::clear_has_date() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void PGImage::clear_date() {
+  if (date_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    date_->clear();
+  }
+  clear_has_date();
+}
+inline const ::std::string& PGImage::date() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGImage.date)
+  return *date_;
+}
+inline void PGImage::set_date(const ::std::string& value) {
+  set_has_date();
+  if (date_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    date_ = new ::std::string;
+  }
+  date_->assign(value);
+  // @@protoc_insertion_point(field_set:protobufUtils.PGImage.date)
+}
+inline void PGImage::set_date(const char* value) {
+  set_has_date();
+  if (date_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    date_ = new ::std::string;
+  }
+  date_->assign(value);
+  // @@protoc_insertion_point(field_set_char:protobufUtils.PGImage.date)
+}
+inline void PGImage::set_date(const char* value, size_t size) {
+  set_has_date();
+  if (date_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    date_ = new ::std::string;
+  }
+  date_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGImage.date)
+}
+inline ::std::string* PGImage::mutable_date() {
+  set_has_date();
+  if (date_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    date_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGImage.date)
+  return date_;
+}
+inline ::std::string* PGImage::release_date() {
+  clear_has_date();
+  if (date_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = date_;
+    date_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void PGImage::set_allocated_date(::std::string* date) {
+  if (date_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete date_;
+  }
+  if (date) {
+    set_has_date();
+    date_ = date;
+  } else {
+    clear_has_date();
+    date_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGImage.date)
+}
+
+// required bytes image = 3;
+inline bool PGImage::has_image() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void PGImage::set_has_image() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void PGImage::clear_has_image() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void PGImage::clear_image() {
+  if (image_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_->clear();
+  }
+  clear_has_image();
+}
+inline const ::std::string& PGImage::image() const {
+  // @@protoc_insertion_point(field_get:protobufUtils.PGImage.image)
+  return *image_;
+}
+inline void PGImage::set_image(const ::std::string& value) {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  image_->assign(value);
+  // @@protoc_insertion_point(field_set:protobufUtils.PGImage.image)
+}
+inline void PGImage::set_image(const char* value) {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  image_->assign(value);
+  // @@protoc_insertion_point(field_set_char:protobufUtils.PGImage.image)
+}
+inline void PGImage::set_image(const void* value, size_t size) {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  image_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:protobufUtils.PGImage.image)
+}
+inline ::std::string* PGImage::mutable_image() {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:protobufUtils.PGImage.image)
+  return image_;
+}
+inline ::std::string* PGImage::release_image() {
+  clear_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = image_;
+    image_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void PGImage::set_allocated_image(::std::string* image) {
+  if (image_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete image_;
+  }
+  if (image) {
+    set_has_image();
+    image_ = image;
+  } else {
+    clear_has_image();
+    image_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:protobufUtils.PGImage.image)
 }
 
 
